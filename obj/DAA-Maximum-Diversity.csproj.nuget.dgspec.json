@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Roxana\\OneDrive\\DAA-Ramification\\DAA-Ramification.csproj": {}
+    "C:\\Users\\Roxana\\OneDrive\\DAA-Maximum-Diversity\\DAA-Maximum-Diversity.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Roxana\\OneDrive\\DAA-Ramification\\DAA-Ramification.csproj": {
+    "C:\\Users\\Roxana\\OneDrive\\DAA-Maximum-Diversity\\DAA-Maximum-Diversity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Roxana\\OneDrive\\DAA-Ramification\\DAA-Ramification.csproj",
-        "projectName": "DAA-Ramification",
-        "projectPath": "C:\\Users\\Roxana\\OneDrive\\DAA-Ramification\\DAA-Ramification.csproj",
+        "projectUniqueName": "C:\\Users\\Roxana\\OneDrive\\DAA-Maximum-Diversity\\DAA-Maximum-Diversity.csproj",
+        "projectName": "DAA-Maximum-Diversity",
+        "projectPath": "C:\\Users\\Roxana\\OneDrive\\DAA-Maximum-Diversity\\DAA-Maximum-Diversity.csproj",
         "packagesPath": "C:\\Users\\Roxana\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Roxana\\OneDrive\\DAA-Ramification\\obj\\",
+        "outputPath": "C:\\Users\\Roxana\\OneDrive\\DAA-Maximum-Diversity\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Roxana\\AppData\\Roaming\\NuGet\\NuGet.Config",
