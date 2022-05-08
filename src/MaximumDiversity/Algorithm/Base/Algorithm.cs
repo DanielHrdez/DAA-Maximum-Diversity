@@ -17,6 +17,6 @@ namespace Algorithm.Base {
     public void SetVectors(Vectors vectors) {
       this.vectors = vectors;
     }
-    public abstract void Run();
+    public abstract Vectors Run(int maxParameter);
   }
 }

@@ -19,5 +19,9 @@ namespace MaximumDiversity {
       this.algorithm = algorithmType;
       this.algorithm.SetVectors(problem);
     }
+
+    public Vectors Run(int maxParameter) {
+      return this.algorithm.Run(maxParameter);
+    }
   }
 }

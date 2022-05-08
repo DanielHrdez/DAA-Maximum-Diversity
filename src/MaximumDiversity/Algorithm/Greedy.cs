@@ -12,22 +12,32 @@ namespace MaximumDiversity.Algorithm {
   public class Greedy : Algorithm {
     public Greedy() : base() {}
 
-    public void Run() {
+    public Vectors Run(int maxParameter) {
+      if (maxParameter < 1 || maxParameter >= this.vectors.Count) {
+        throw new System.ArgumentException(
+            "maxParameter must be greater than 0 " +
+            "and less than the number of vectors"
+        );
+      }
       Vectors solution = new Vectors();
-      List<float> center = this.Center(this.vectors);
+      Vector center = this.Center(this.vectors);
       while (solution.Count <= m) {
-        List<float> farthest = this.Farthest(center, solution);
+        Vector farthest = this.Farthest(center, solution);
         solution.AddVector(farthest);
         this.vectors.RemoveVector(farthest);
         center = this.Center(this.vectors);
       }
-      this.vectors = solution;
+      return solution;
     }
 
-    private List<float> Center(Vectors vectors) {
+    private Vector Farthest(Vector center, Vectors solution) {
+
+    }
+
+    private Vector Center(Vectors vectors) {
       int numberVectors = vectors.Count;
       int numberComponents = vectors[0].Count;
-      List<float> center = new List<float>(new float[numberVectors]);
+      Vector center = new Vector(new float[numberVectors]);
       float constant = 1 / numberVectors;
       for (int i = 0; i < numberComponents; i++) {
         for (int j = 0; j < numberVectors; j++) {

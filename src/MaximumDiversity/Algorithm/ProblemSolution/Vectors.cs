@@ -10,20 +10,20 @@
 
 namespace Algorithm.ProblemSolution {
   public class Vectors {
-    private List<List<float>> vectors;
+    private List<Vector> vectors;
 
     /**
      * Constructor of the class
      */
     public Vectors() {
-      this.vectors = new List<List<float>>();
+      this.vectors = new List<Vector>();
     }
 
-    public void AddVector(List<float> vector) {
+    public void AddVector(Vector vector) {
       this.vectors.Add(vector);
     }
 
-    public void RemoveVector(List<float> vector) {
+    public void RemoveVector(Vector vector) {
       this.vectors.Remove(vector);
     }
 
@@ -39,7 +39,7 @@ namespace Algorithm.ProblemSolution {
       }
     }
 
-    public List<float> this[int index] {
+    public Vector this[int index] {
       get {
         return vectors[index];
       }
