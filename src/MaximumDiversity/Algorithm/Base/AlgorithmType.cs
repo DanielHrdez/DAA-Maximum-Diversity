@@ -5,11 +5,14 @@
  * Diseño y Análisis de Algoritmos
  * @author Daniel Hernandez de Leon
  * @date 08/05/2022
- * Tabu class
+ * AlgorithmType enum
  */
 
-namespace MaximumDiversity.Algorithm {
-  public class Tabu : Algorithm {
-    
+namespace Algorithm.Base {
+  public enum AlgorithmType {
+    Greedy = new Greedy(),
+    Grasp = new Grasp(),
+    Tabu = new Tabu(),
+    BrunchBound = new BrunchBound()
   }
 }
