@@ -48,7 +48,7 @@ namespace Algorithm.ProblemSolution {
       }
     }
 
-    public float this[int index1, int index2] {
+    public double this[int index1, int index2] {
       get {
         return vectors[index1][index2];
       }

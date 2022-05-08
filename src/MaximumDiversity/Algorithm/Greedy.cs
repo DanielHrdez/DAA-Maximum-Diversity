@@ -22,7 +22,7 @@ namespace MaximumDiversity.Algorithm {
       Vectors solution = new Vectors();
       Vector center = this.Center(this.vectors);
       while (solution.Count <= m) {
-        Vector farthest = this.Farthest(center, solution);
+        Vector farthest = this.Farthest(center);
         solution.AddVector(farthest);
         this.vectors.RemoveVector(farthest);
         center = this.Center(this.vectors);
@@ -30,15 +30,24 @@ namespace MaximumDiversity.Algorithm {
       return solution;
     }
 
-    private Vector Farthest(Vector center, Vectors solution) {
-
+    private Vector Farthest(Vector center) {
+      Vector farthest = this.vectors[0];
+      double maxDistance = 0;
+      foreach (Vector vector in this.vectors) {
+        double distance = this.Distance(center, vector);
+        if (distance > maxDistance) {
+          maxDistance = distance;
+          farthest = vector;
+        }
+      }
+      return farthest;
     }
 
     private Vector Center(Vectors vectors) {
       int numberVectors = vectors.Count;
       int numberComponents = vectors[0].Count;
-      Vector center = new Vector(new float[numberVectors]);
-      float constant = 1 / numberVectors;
+      Vector center = new Vector(new double[numberVectors]);
+      double constant = 1 / numberVectors;
       for (int i = 0; i < numberComponents; i++) {
         for (int j = 0; j < numberVectors; j++) {
           center[i] += vectors[j][i];

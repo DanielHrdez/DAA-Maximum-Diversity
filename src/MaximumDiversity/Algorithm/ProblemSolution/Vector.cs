@@ -10,18 +10,18 @@
 
 namespace Algorithm.ProblemSolution {
   public class Vector {
-    private List<float> vector;
+    private List<double> vector;
 
     /**
      * Constructor of the class
      */
     public Vector() {
-      this.vector = new List<float>();
+      this.vector = new List<double>();
     }
 
-    public Vector(float[] vector) {
-      this.vector = new List<float>();
-      foreach (float value in vector) {
+    public Vector(double[] vector) {
+      this.vector = new List<double>();
+      foreach (double value in vector) {
         this.vector.Add(value);
       }
     }
@@ -32,13 +32,22 @@ namespace Algorithm.ProblemSolution {
       }
     }
 
-    public float this[int index] {
+    public double this[int index] {
       get {
         return this.vector[index];
       }
       set {
         this.vector[index] = value;
       }
+    }
+
+    public double Distance(Vector vector) {
+      double sum = 0;
+      for (int i = 0; i < this.Count; i++) {
+        double value = this[i] - vector[i];
+        sum += value * value;
+      }
+      return Math.Sqrt(sum);
     }
   }
 }
