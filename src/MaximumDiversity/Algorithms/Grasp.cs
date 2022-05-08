@@ -5,11 +5,15 @@
  * Diseño y Análisis de Algoritmos
  * @author Daniel Hernandez de Leon
  * @date 08/05/2022
- * LocalSearch class
+ * Grass class
  */
 
-namespace Algorithm.LocalSearch {
-  public class LocalSearch {
-    
+using Algorithms.ProblemSolution;
+
+namespace MaximumDiversity.Algorithms {
+  public class Grasp : Algorithm {
+    override public Vectors Run(int maxParameter) {
+      return this.vectors;
+    }
   }
 }

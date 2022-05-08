@@ -8,6 +8,9 @@
  * MaximumDiversity class
  */
 
+using MaximumDiversity.Algorithms;
+using Algorithms.ProblemSolution;
+
 namespace MaximumDiversity {
   public class MaximumDiversity {
     private Algorithm algorithm;
@@ -15,8 +18,19 @@ namespace MaximumDiversity {
     /**
      * Constructor of the class
      */
-    public MaximumDiversity(Vectors problem, AlgorithmType algorithmType) {
-      this.algorithm = algorithmType;
+    public MaximumDiversity(Vectors problem, AlgorithmType algorithm) {
+      Type algorithmType = System.Type.GetType("MaximumDiversity.Algorithms." + algorithm.ToString())!;
+      if (algorithmType == null) {
+        throw new System.ArgumentException(
+            "The algorithm " + algorithm.ToString() + " does not exist"
+        );
+      }
+      this.algorithm = (Algorithm) System.Activator.CreateInstance(algorithmType)!;
+      if (this.algorithm == null) {
+        throw new System.ArgumentException(
+            "The algorithm " + algorithm.ToString() + " does not exist"
+        );
+      }
       this.algorithm.SetVectors(problem);
     }
 

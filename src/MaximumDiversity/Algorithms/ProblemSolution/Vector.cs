@@ -8,7 +8,7 @@
  * Solution class
  */
 
-namespace Algorithm.ProblemSolution {
+namespace Algorithms.ProblemSolution {
   public class Vector {
     private List<double> vector;
 

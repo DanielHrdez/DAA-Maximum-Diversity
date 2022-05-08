@@ -8,11 +8,13 @@
  * Greedy class
  */
 
-namespace MaximumDiversity.Algorithm {
+using Algorithms.ProblemSolution;
+
+namespace MaximumDiversity.Algorithms {
   public class Greedy : Algorithm {
     public Greedy() : base() {}
 
-    public Vectors Run(int maxParameter) {
+    override public Vectors Run(int maxParameter) {
       if (maxParameter < 1 || maxParameter >= this.vectors.Count) {
         throw new System.ArgumentException(
             "maxParameter must be greater than 0 " +

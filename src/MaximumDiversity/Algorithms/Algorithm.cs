@@ -8,7 +8,9 @@
  * Algorithm abstract class
  */
 
-namespace Algorithm.Base {
+using Algorithms.ProblemSolution;
+
+namespace MaximumDiversity.Algorithms {
   public abstract class Algorithm {
     protected Vectors vectors;
     public Algorithm() {

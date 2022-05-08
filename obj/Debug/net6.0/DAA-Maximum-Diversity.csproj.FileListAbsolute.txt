@@ -1,0 +1,5 @@
+C:\Users\Danie\Desktop\DAA-Maximum-Diversity\obj\Debug\net6.0\DAA-Maximum-Diversity.csproj.AssemblyReference.cache
+C:\Users\Danie\Desktop\DAA-Maximum-Diversity\obj\Debug\net6.0\DAA-Maximum-Diversity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Danie\Desktop\DAA-Maximum-Diversity\obj\Debug\net6.0\DAA-Maximum-Diversity.AssemblyInfoInputs.cache
+C:\Users\Danie\Desktop\DAA-Maximum-Diversity\obj\Debug\net6.0\DAA-Maximum-Diversity.AssemblyInfo.cs
+C:\Users\Danie\Desktop\DAA-Maximum-Diversity\obj\Debug\net6.0\DAA-Maximum-Diversity.csproj.CoreCompileInputs.cache

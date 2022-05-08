@@ -8,8 +8,12 @@
  * BrunchBound class
  */
 
-namespace MaximumDiversity.Algorithm {
+using Algorithms.ProblemSolution;
+
+namespace MaximumDiversity.Algorithms {
   public class BrunchBound : Algorithm {
-    
+    override public Vectors Run(int maxParameter) {
+      return this.vectors;
+    }
   }
 }
