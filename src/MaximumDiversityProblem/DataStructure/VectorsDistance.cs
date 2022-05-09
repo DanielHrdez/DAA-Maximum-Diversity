@@ -44,6 +44,7 @@ public class VectorsDistance : Vectors {
   }
 
   public override string ToString() {
-    return $"Vectors:\n{base.ToString()}\n\nDistance:\n{this.distance}";
+    string distance = this.distance.ToString().Replace(",", ".");
+    return $"Vectors:\n{base.ToString()}\n\nDistance:\n{distance}";
   }
 }

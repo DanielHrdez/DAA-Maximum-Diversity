@@ -97,12 +97,11 @@ public class Vectors : IEnumerable {
 
   public Vector Center() {
     Vector center = new Vector(new double[this.Components]);
-    double constant = 1 / (double)this.Count;
     for (int i = 0; i < this.Components; i++) {
       for (int j = 0; j < this.Count; j++) {
         center[i] += this.vectors[j][i];
       }
-      center[i] *= constant;
+      center[i] /= this.Count;
     }
     return center;
   }
