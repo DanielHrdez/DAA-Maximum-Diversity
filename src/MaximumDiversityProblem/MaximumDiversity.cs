@@ -34,11 +34,21 @@ public class MaximumDiversity {
   }
 
   private void SetAlgorithm(AlgorithmType algorithmName) {
-    Type algorithmType = System.Type.GetType("MaximumDiversityProblem.Algorithms." + algorithmName.ToString())!;
-    if (algorithmType == null) {
-      throw new System.ArgumentException(
-          "The algorithm \u001b[31m" + algorithmName.ToString() + "\u001b[0m does not exist"
-      );
+    Type algorithmType;
+    try {
+      algorithmType = System.Type.GetType("MaximumDiversityProblem.Algorithms.Exact." + algorithmName.ToString())!;
+      if (algorithmType == null) {
+        throw new System.ArgumentException(
+            "The algorithm \u001b[31m" + algorithmName.ToString() + "\u001b[0m does not exist"
+        );
+      }
+    } catch (System.ArgumentException e) {
+      algorithmType = System.Type.GetType("MaximumDiversityProblem.Algorithms.Approximated." + algorithmName.ToString())!;
+      if (algorithmType == null) {
+        throw new System.ArgumentException(
+            "The algorithm \u001b[31m" + algorithmName.ToString() + "\u001b[0m does not exist"
+        );
+      }
     }
     this.algorithm = (Algorithm) System.Activator.CreateInstance(algorithmType)!;
     if (this.algorithm == null) {

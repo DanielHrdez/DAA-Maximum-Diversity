@@ -8,7 +8,7 @@
  * LocalSearch class
  */
 
-namespace MaximumDiversityProblem.Algorithms.LocalSearch;
-public class LocalSearch {
+namespace MaximumDiversityProblem.Algorithms.Approximated.LocalSearch;
+public class Swap {
   
 }

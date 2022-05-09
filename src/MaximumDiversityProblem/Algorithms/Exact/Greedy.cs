@@ -10,7 +10,7 @@
 
 using MaximumDiversityProblem.DataStructure;
 
-namespace MaximumDiversityProblem.Algorithms;
+namespace MaximumDiversityProblem.Algorithms.Exact;
 public class Greedy : Algorithm {
   public Greedy() : base() {}
 

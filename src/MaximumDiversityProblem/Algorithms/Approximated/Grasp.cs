@@ -5,13 +5,13 @@
  * Diseño y Análisis de Algoritmos
  * @author Daniel Hernandez de Leon
  * @date 08/05/2022
- * Tabu class
+ * Grass class
  */
 
 using MaximumDiversityProblem.DataStructure;
 
-namespace MaximumDiversityProblem.Algorithms;
-public class Tabu : Algorithm {
+namespace MaximumDiversityProblem.Algorithms.Approximated;
+public class Grasp : Algorithm {
   override public Vectors Run(int maxParameter) {
     return this.vectors;
   }
