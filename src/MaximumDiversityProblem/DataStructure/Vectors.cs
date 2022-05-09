@@ -5,20 +5,24 @@
  * Diseño y Análisis de Algoritmos
  * @author Daniel Hernandez de Leon
  * @date 08/05/2022
- * Solution class
+ * Vectors class
  */
 
 using System.Collections;
 
 namespace MaximumDiversityProblem.DataStructure;
 public class Vectors : IEnumerable {
-  private List<Vector> vectors;
+  protected List<Vector> vectors;
 
   /**
     * Constructor of the class
     */
   public Vectors() {
     this.vectors = new List<Vector>();
+  }
+
+  public Vectors(Vectors vectors) {
+    this.vectors = new List<Vector>(vectors.vectors);
   }
 
   public Vectors(int numberVectors, int numberElements) {
@@ -32,8 +36,8 @@ public class Vectors : IEnumerable {
     this.vectors.Add(vector);
   }
 
-  public void RemoveVector(Vector vector) {
-    this.vectors.Remove(vector);
+  public bool RemoveVector(Vector vector) {
+    return this.vectors.Remove(vector);
   }
 
   public int Count {

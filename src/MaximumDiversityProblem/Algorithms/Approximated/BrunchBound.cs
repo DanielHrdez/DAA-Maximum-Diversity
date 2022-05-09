@@ -12,7 +12,7 @@ using MaximumDiversityProblem.DataStructure;
 
 namespace MaximumDiversityProblem.Algorithms.Approximated;
 public class BrunchBound : Algorithm {
-  override public (Vectors, double) Run(int maxParameter) {
-    return (this.vectors, this.distance);
+  override public VectorsDistance Run(int maxParameter) {
+    return this.vectors;
   }
 }

@@ -29,7 +29,7 @@ public class MaximumDiversity {
       algorithmName
   ) {}
 
-  public (Vectors vectors, double distance) Run(int maxParameter) {
+  public VectorsDistance Run(int maxParameter) {
     return this.algorithm.Run(maxParameter);
   }
 

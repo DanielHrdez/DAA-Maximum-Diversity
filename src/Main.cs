@@ -12,11 +12,10 @@ using MaximumDiversityProblem;
 using MaximumDiversityProblem.DataStructure;
 
 MaximumDiversity maximumDiversity = new MaximumDiversity(
-    "data/max_div_30_3.txt",
+    "data/max_div_15_2.txt",
     "Greedy"
 );
 
-(Vectors vectors, double distance) solution = maximumDiversity.Run(4);
+VectorsDistance solution = maximumDiversity.Run(4);
 
-Console.WriteLine(solution.vectors);
-Console.WriteLine(solution.distance);
+Console.WriteLine(solution);

@@ -5,7 +5,7 @@
  * Diseño y Análisis de Algoritmos
  * @author Daniel Hernandez de Leon
  * @date 08/05/2022
- * Solution class
+ * Vector class
  */
 
 namespace MaximumDiversityProblem.DataStructure;
