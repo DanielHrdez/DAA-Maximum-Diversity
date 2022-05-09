@@ -8,4 +8,15 @@
  * Main program
  */
 
-Console.WriteLine("Hello, World!");
+using MaximumDiversityProblem;
+using MaximumDiversityProblem.DataStructure;
+using MaximumDiversityProblem.Algorithms;
+
+MaximumDiversity maximumDiversity = new MaximumDiversity(
+    "data/max_div_15_2.txt",
+    AlgorithmType.Greedy
+);
+
+Vectors solution = maximumDiversity.Run(2);
+
+Console.WriteLine(solution);

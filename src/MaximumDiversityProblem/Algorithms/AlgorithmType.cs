@@ -8,7 +8,7 @@
  * AlgorithmType enum
  */
 
-namespace MaximumDiversity.Algorithms {
+namespace MaximumDiversityProblem.Algorithms {
   public enum AlgorithmType {
     Greedy,
     Grasp,

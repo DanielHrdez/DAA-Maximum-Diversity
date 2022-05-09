@@ -8,7 +8,7 @@
  * Solution class
  */
 
-namespace Algorithms.ProblemSolution {
+namespace MaximumDiversityProblem.DataStructure {
   public class Vector {
     private List<double> vector;
 
@@ -23,6 +23,13 @@ namespace Algorithms.ProblemSolution {
       this.vector = new List<double>();
       foreach (double value in vector) {
         this.vector.Add(value);
+      }
+    }
+
+    public Vector(int numberElements) {
+      this.vector = new List<double>();
+      for (int i = 0; i < numberElements; i++) {
+        this.vector.Add(0);
       }
     }
 
@@ -48,6 +55,16 @@ namespace Algorithms.ProblemSolution {
         sum += value * value;
       }
       return Math.Sqrt(sum);
+    }
+
+    override public string ToString() {
+      string result = "[";
+      foreach (double value in this.vector) {
+        result += value + ", ";
+      }
+      result = result.Substring(0, result.Length - 2);
+      result += "]";
+      return result;
     }
   }
 }

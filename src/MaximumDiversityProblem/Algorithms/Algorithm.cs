@@ -8,17 +8,29 @@
  * Algorithm abstract class
  */
 
-using Algorithms.ProblemSolution;
+using MaximumDiversityProblem.DataStructure;
 
-namespace MaximumDiversity.Algorithms {
+namespace MaximumDiversityProblem.Algorithms {
   public abstract class Algorithm {
     protected Vectors vectors;
+
     public Algorithm() {
       this.vectors = new Vectors();
     }
+
     public void SetVectors(Vectors vectors) {
       this.vectors = vectors;
     }
+
     public abstract Vectors Run(int maxParameter);
+
+    protected void CheckParameters(int maxParameter) {
+      if (maxParameter < 1 || maxParameter >= this.vectors.Count) {
+        throw new System.ArgumentException(
+            "maxParameter must be greater than 0 " +
+            "and less than the number of vectors"
+        );
+      }
+    }
   }
 }
