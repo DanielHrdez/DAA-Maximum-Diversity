@@ -12,7 +12,7 @@ using System.Collections;
 
 namespace MaximumDiversityProblem.DataStructure;
 public class Vectors : IEnumerable {
-  protected List<Vector> vectors;
+  public List<Vector> vectors;
 
   /**
     * Constructor of the class
@@ -112,5 +112,9 @@ public class Vectors : IEnumerable {
       clone[i] = this[i].Clone();
     }
     return clone;
+  }
+
+  public int IndexOf(Vector vector) {
+    return this.vectors.IndexOf(vector);
   }
 }

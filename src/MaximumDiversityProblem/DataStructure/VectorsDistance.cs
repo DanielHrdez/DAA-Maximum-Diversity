@@ -10,25 +10,45 @@
 
 
 namespace MaximumDiversityProblem.DataStructure;
-public class VectorsDistance : Vectors {
+public class VectorsDistance {
+  private Vectors vectors;
   private double distance;
   private List<bool> indices;
+  private Vectors solution;
   
-  public VectorsDistance() : base() {
+  public VectorsDistance() {
     this.distance = 0;
     this.indices = new List<bool>();
+    this.solution = new Vectors();
+    this.vectors = new Vectors();
   }
 
-  public VectorsDistance(Vectors vectors) : base(vectors) {
+  public VectorsDistance(Vectors vectors) {
     this.distance = 0;
     this.indices = new List<bool>();
     for (int i = 0; i < vectors.Count; i++) {
       this.indices.Add(false);
     }
+    this.solution = new Vectors();
+    this.vectors = new Vectors(vectors);
   }
 
   public VectorsDistance(Vectors vectors, double distance) : this(vectors) {
     this.distance = distance;
+  }
+
+  public void AddVector(Vector vector) {
+    int index = this.vectors.IndexOf(vector);
+    if (index != -1) {
+      this.indices[index] = true;
+      this.solution.AddVector(vector);
+    }
+  }
+
+  public int Count {
+    get {
+      return this.vectors.Count;
+    }
   }
 
   public double Distance {
@@ -37,6 +57,12 @@ public class VectorsDistance : Vectors {
     }
     set {
       this.distance = value;
+    }
+  }
+
+  public int LengthSolution {
+    get {
+      return this.solution.Count;
     }
   }
 
@@ -54,6 +80,18 @@ public class VectorsDistance : Vectors {
     }
     indices = indices.Substring(0, indices.Length - 2);
     indices += "]";
-    return $"Vectors:\n{base.ToString()}\n\nIndices:\n{indices}\n\nDistance:\n{distance}";
+    return $"Vectors:\n{this.solution.ToString()}\n\nIndices:\n{indices}\n\nDistance:\n{distance}";
+  }
+
+  public Vector Center() {
+    return this.vectors.Center();
+  }
+
+  public (Vector, double) FarthestFrom(Vector from) {
+    return this.vectors.FarthestFrom(from);
+  }
+
+  public bool RemoveVector(Vector vector) {
+    return this.vectors.RemoveVector(vector);
   }
 }

@@ -16,15 +16,14 @@ public class Greedy : Algorithm {
 
   override public VectorsDistance Run(int maxParameter) {
     this.CheckParameters(maxParameter);
-    Vectors solution = new Vectors();
     Vector center = this.vectors.Center();
-    while (solution.Count != maxParameter) {
+    while (this.vectors.LengthSolution != maxParameter) {
       (Vector vector, double distance) farthest = this.vectors.FarthestFrom(center);
       this.vectors.Distance += farthest.distance;
-      solution.AddVector(farthest.vector);
+      this.vectors.AddVector(farthest.vector);
       this.vectors.RemoveVector(farthest.vector);
       center = this.vectors.Center();
     }
-    return new VectorsDistance(solution, this.vectors.Distance);
+    return this.vectors;
   }
 }
