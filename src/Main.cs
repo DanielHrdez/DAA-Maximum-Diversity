@@ -10,13 +10,13 @@
 
 using MaximumDiversityProblem;
 using MaximumDiversityProblem.DataStructure;
-using MaximumDiversityProblem.Algorithms;
 
 MaximumDiversity maximumDiversity = new MaximumDiversity(
     "data/max_div_30_3.txt",
-    AlgorithmType.Greedy
+    "Greedy"
 );
 
-Vectors solution = maximumDiversity.Run(4);
+(Vectors vectors, double distance) solution = maximumDiversity.Run(4);
 
-Console.WriteLine(solution);
+Console.WriteLine(solution.vectors);
+Console.WriteLine(solution.distance);

@@ -13,16 +13,27 @@ using MaximumDiversityProblem.DataStructure;
 namespace MaximumDiversityProblem.Algorithms;
 public abstract class Algorithm {
   protected Vectors vectors;
+  protected List<int> indexs;
+  protected double distance;
 
   public Algorithm() {
     this.vectors = new Vectors();
+    this.indexs = new List<int>();
+    this.distance = 0;
+  }
+
+  public Algorithm(Vectors vectors) {
+    this.vectors = vectors;
+    this.indexs = new List<int>(vectors.Count);
+    this.distance = 0;
   }
 
   public void SetVectors(Vectors vectors) {
     this.vectors = vectors;
+    this.indexs = new List<int>(vectors.Count);
   }
 
-  public abstract Vectors Run(int maxParameter);
+  public abstract (Vectors, double) Run(int maxParameter);
 
   protected void CheckParameters(int maxParameter) {
     if (maxParameter < 1 || maxParameter >= this.vectors.Count) {

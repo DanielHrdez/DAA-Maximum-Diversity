@@ -66,4 +66,12 @@ public class Vector {
     result += "]";
     return result;
   }
+
+  public Vector Clone() {
+    Vector vector = new Vector(this.Count);
+    for (int i = 0; i < this.Count; i++) {
+      vector[i] = this[i];
+    }
+    return vector;
+  }
 }

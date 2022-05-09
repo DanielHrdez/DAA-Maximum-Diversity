@@ -8,7 +8,13 @@
  * LocalSearch class
  */
 
+using MaximumDiversityProblem.DataStructure;
+
 namespace MaximumDiversityProblem.Algorithms.Approximated.LocalSearch;
 public class Swap {
-  
+  // public static Vectors Search(Vectors solution, Vectors rest) {
+  //   Vectors bestSolution = solution;
+  //   int bestSolutionCost = solution.Cost;
+
+  // }
 }

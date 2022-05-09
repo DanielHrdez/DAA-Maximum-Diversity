@@ -19,41 +19,42 @@ public class MaximumDiversity {
   /**
     * Constructor of the class
     */
-  public MaximumDiversity(Vectors problem, AlgorithmType algorithmName) {
+  public MaximumDiversity(Vectors problem, string algorithmName) {
     this.SetAlgorithm(algorithmName);
     this.algorithm!.SetVectors(problem);
   }
 
-  public MaximumDiversity(string vectorsFilePath, AlgorithmType algorithmName) : this(
+  public MaximumDiversity(string vectorsFilePath, string algorithmName) : this(
       ReadVectorsFile.Read(vectorsFilePath),
       algorithmName
   ) {}
 
-  public Vectors Run(int maxParameter) {
+  public (Vectors vectors, double distance) Run(int maxParameter) {
     return this.algorithm.Run(maxParameter);
   }
 
-  private void SetAlgorithm(AlgorithmType algorithmName) {
+  private void SetAlgorithm(string algorithmName) {
     Type algorithmType;
     try {
-      algorithmType = System.Type.GetType("MaximumDiversityProblem.Algorithms.Exact." + algorithmName.ToString())!;
+      algorithmType = System.Type.GetType("MaximumDiversityProblem.Algorithms.Exact." + algorithmName)!;
       if (algorithmType == null) {
         throw new System.ArgumentException(
-            "The algorithm \u001b[31m" + algorithmName.ToString() + "\u001b[0m does not exist"
+            "The algorithm \u001b[31m" + algorithmName + "\u001b[0m does not exist in Exact Algorithms."
         );
       }
     } catch (System.ArgumentException e) {
-      algorithmType = System.Type.GetType("MaximumDiversityProblem.Algorithms.Approximated." + algorithmName.ToString())!;
+      algorithmType = System.Type.GetType("MaximumDiversityProblem.Algorithms.Approximated." + algorithmName)!;
       if (algorithmType == null) {
         throw new System.ArgumentException(
-            "The algorithm \u001b[31m" + algorithmName.ToString() + "\u001b[0m does not exist"
+            e.Message +
+            "\nThe algorithm \u001b[31m" + algorithmName + "\u001b[0m does not exist in Approximated Algorithms."
         );
       }
     }
     this.algorithm = (Algorithm) System.Activator.CreateInstance(algorithmType)!;
     if (this.algorithm == null) {
       throw new System.ArgumentException(
-          "The algorithm \u001b[31m" + algorithmName.ToString() + "\u001b[0m does not exist"
+          "The algorithm \u001b[31m" + algorithmName + "\u001b[0m does not exist"
       );
     }
   }
