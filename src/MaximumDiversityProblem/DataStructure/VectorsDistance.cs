@@ -21,7 +21,10 @@ public class VectorsDistance : Vectors {
 
   public VectorsDistance(Vectors vectors) : base(vectors) {
     this.distance = 0;
-    this.indices = new List<bool>(vectors.Count);
+    this.indices = new List<bool>();
+    for (int i = 0; i < vectors.Count; i++) {
+      this.indices.Add(false);
+    }
   }
 
   public VectorsDistance(Vectors vectors, double distance) : this(vectors) {
@@ -45,6 +48,12 @@ public class VectorsDistance : Vectors {
 
   public override string ToString() {
     string distance = this.distance.ToString().Replace(",", ".");
-    return $"Vectors:\n{base.ToString()}\n\nDistance:\n{distance}";
+    string indices = "[";
+    foreach (bool value in this.indices) {
+      indices += value ? "1, " : "0, ";
+    }
+    indices = indices.Substring(0, indices.Length - 2);
+    indices += "]";
+    return $"Vectors:\n{base.ToString()}\n\nIndices:\n{indices}\n\nDistance:\n{distance}";
   }
 }
