@@ -5,11 +5,16 @@
  * Diseño y Análisis de Algoritmos
  * @author Daniel Hernandez de Leon
  * @date 08/05/2022
- * LocalSearch class
+ * AlgorithmType enum
  */
 
-namespace MaximumDiversityProblem.Algorithms.LocalSearch {
-  public class LocalSearch {
-    
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace MaximumDiversityProblemTest.Algorithms {
+  public enum AlgorithmType {
+    Greedy,
+    Grasp,
+    Tabu,
+    BrunchBound
   }
 }
