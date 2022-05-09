@@ -10,10 +10,9 @@
 
 using MaximumDiversityProblem.DataStructure;
 
-namespace MaximumDiversityProblem.Algorithms {
-  public class Tabu : Algorithm {
-    override public Vectors Run(int maxParameter) {
-      return this.vectors;
-    }
+namespace MaximumDiversityProblem.Algorithms;
+public class Tabu : Algorithm {
+  override public Vectors Run(int maxParameter) {
+    return this.vectors;
   }
 }

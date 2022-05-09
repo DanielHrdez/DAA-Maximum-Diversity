@@ -8,11 +8,10 @@
  * AlgorithmType enum
  */
 
-namespace MaximumDiversityProblem.Algorithms {
-  public enum AlgorithmType {
-    Greedy,
-    Grasp,
-    Tabu,
-    BrunchBound
-  }
+namespace MaximumDiversityProblem.Algorithms;
+public enum AlgorithmType {
+  Greedy,
+  Grasp,
+  Tabu,
+  BrunchBound
 }

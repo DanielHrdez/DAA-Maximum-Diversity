@@ -8,8 +8,7 @@
  * LocalSearch class
  */
 
-namespace MaximumDiversityProblem.Algorithms.LocalSearch {
-  public class LocalSearch {
-    
-  }
+namespace MaximumDiversityProblem.Algorithms.LocalSearch;
+public class LocalSearch {
+  
 }
