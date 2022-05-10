@@ -14,7 +14,7 @@ namespace MaximumDiversityProblem.Algorithms.Exact;
 public class Greedy : Algorithm {
   public Greedy() : base() {}
 
-  override public VectorsDistance Run(int maxLength) {
+  public override VectorsDistance Run(int maxLength) {
     this.CheckParameters(maxLength);
     Vector center = this.vectors.Center();
     while (this.vectors.LengthSolution != maxLength) {

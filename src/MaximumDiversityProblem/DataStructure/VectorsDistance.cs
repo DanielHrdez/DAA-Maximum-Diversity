@@ -70,7 +70,7 @@ public class VectorsDistance {
       this.indices[index] = false;
       this.solution.RemoveVector(vector);
       for (int i = 0; i < this.solution.Count; i++) {
-        this.distance += vector.Distance(this.solution[i]);
+        this.distance -= vector.Distance(this.solution[i]);
       }
       return true;
     }
@@ -112,7 +112,9 @@ public class VectorsDistance {
     }
     indices = indices.Substring(0, indices.Length - 2);
     indices += "]";
-    return $"Vectors:\n{this.solution.ToString()}\n\nIndices:\n{indices}\n\nDistance:\n{distance}";
+    return $"\u001b[32mVectors:\u001b[0m\n{this.solution.ToString()}\n" +
+        $"\u001b[32mIndices:\u001b[0m\n{indices}\n" +
+        $"\u001b[32mDistance:\u001b[0m\n{distance}\n";
   }
 
   public Vector Center() {

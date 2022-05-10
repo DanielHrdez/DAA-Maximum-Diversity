@@ -57,7 +57,7 @@ public class Vector {
     return Math.Sqrt(sum);
   }
 
-  override public string ToString() {
+  public override string ToString() {
     string result = "[";
     foreach (double value in this.vector) {
       result += value.ToString().Replace(",", ".") + ", ";

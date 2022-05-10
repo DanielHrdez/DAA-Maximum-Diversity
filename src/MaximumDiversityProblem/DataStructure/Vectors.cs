@@ -70,7 +70,7 @@ public class Vectors : IEnumerable {
     }
   }
 
-  override public string ToString() {
+  public override string ToString() {
     string result = "";
     foreach (Vector vector in this.vectors) {
       result += vector.ToString() + "\n";

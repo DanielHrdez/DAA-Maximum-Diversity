@@ -10,12 +10,17 @@
 
 using MaximumDiversityProblem;
 using MaximumDiversityProblem.DataStructure;
+using MaximumDiversityProblem.Algorithms.Approximated.LocalSearch;
 
 MaximumDiversity maximumDiversity = new MaximumDiversity(
-    "data/max_div_30_3.txt",
+    "data/max_div_20_3.txt",
     "Greedy"
 );
 
-VectorsDistance solution = maximumDiversity.Run(2);
+VectorsDistance solution = maximumDiversity.Run(5);
 
 Console.WriteLine(solution);
+
+VectorsDistance swapped = Swap.Search(solution);
+
+Console.WriteLine(swapped);

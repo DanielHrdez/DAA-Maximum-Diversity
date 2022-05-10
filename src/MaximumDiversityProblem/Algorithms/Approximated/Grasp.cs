@@ -12,7 +12,7 @@ using MaximumDiversityProblem.DataStructure;
 
 namespace MaximumDiversityProblem.Algorithms.Approximated;
 public class Grasp : Algorithm {
-  override public VectorsDistance Run(int maxLength) {
+  public override VectorsDistance Run(int maxLength) {
     return this.vectors;
   }
 }
