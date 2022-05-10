@@ -18,6 +18,7 @@ public class ReadVectorsFile {
   /// Reads the vectors file.
   /// </summary>
   /// <param name="filePath">The file path.</param>
+  /// <returns>The vectors.</returns>
   public static Vectors Read(string filePath) {
     string[] lines = File.ReadAllLines(filePath);
     Vectors vectors = new Vectors(int.Parse(lines[0]), int.Parse(lines[1]));

@@ -42,6 +42,7 @@ public class MaximumDiversity {
   /// Runs the algorithm.
   /// </summary>
   /// <param name="maxLength">The maximum length of the solution.</param>
+  /// <returns>The solution.</returns>
   public VectorsDistance Run(int maxLength) {
     return this.algorithm.Run(maxLength);
   }
