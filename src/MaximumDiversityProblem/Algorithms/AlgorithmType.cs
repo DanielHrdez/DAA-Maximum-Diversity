@@ -7,6 +7,10 @@
 /// <enum>AlgorithmType</enum>
 
 namespace MaximumDiversityProblem.Algorithms;
+
+/// <summary>
+/// Enum that represents the type of algorithm.
+/// </summary>
 public enum AlgorithmType {
   Greedy,
   Grasp,
