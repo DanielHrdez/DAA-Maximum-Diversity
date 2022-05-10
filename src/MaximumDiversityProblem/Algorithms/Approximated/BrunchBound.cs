@@ -9,7 +9,16 @@
 using MaximumDiversityProblem.DataStructure;
 
 namespace MaximumDiversityProblem.Algorithms.Approximated;
+
+/// <summary>
+/// Class that represents the brunch bound algorithm.
+/// </summary>
 public class BrunchBound : Algorithm {
+  /// <summary>
+  /// Runs the BrunchBound search algorithm.
+  /// </summary>
+  /// <param name="maxLength">The maximum length of the solution.</param>
+  /// <returns>The vectors distance.</returns>
   public override VectorsDistance Run(int maxLength) {
     return this.vectors;
   }

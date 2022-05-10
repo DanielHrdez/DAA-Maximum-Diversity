@@ -9,7 +9,16 @@
 using MaximumDiversityProblem.DataStructure;
 
 namespace MaximumDiversityProblem.Algorithms.Approximated;
+
+/// <summary>
+/// Class that represents the tabu search algorithm.
+/// </summary>
 public class Tabu : Algorithm {
+  /// <summary>
+  /// Runs the tabu search algorithm.
+  /// </summary>
+  /// <param name="maxLength">The maximum length of the solution.</param>
+  /// <returns>The vectors distance.</returns>
   public override VectorsDistance Run(int maxLength) {
     return this.vectors;
   }

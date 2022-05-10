@@ -9,9 +9,16 @@
 using MaximumDiversityProblem.DataStructure;
 
 namespace MaximumDiversityProblem.Algorithms.Exact;
-public class Greedy : Algorithm {
-  public Greedy() : base() {}
 
+/// <summary>
+/// Greedy algorithm.
+/// </summary>
+public class Greedy : Algorithm {
+  /// <summary>
+  /// Runs the algorithm.
+  /// </summary>
+  /// <param name="maxLength">The maximum length.</param>
+  /// <returns>The vectors distance.</returns>
   public override VectorsDistance Run(int maxLength) {
     this.CheckParameters(maxLength);
     Vector center = this.vectors.Center();

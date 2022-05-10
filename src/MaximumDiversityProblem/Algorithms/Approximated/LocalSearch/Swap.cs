@@ -9,7 +9,16 @@
 using MaximumDiversityProblem.DataStructure;
 
 namespace MaximumDiversityProblem.Algorithms.Approximated.LocalSearch;
+
+/// <summary>
+/// Class that represents the swap local search algorithm.
+/// </summary>
 public class Swap {
+  /// <summary>
+  /// Runs the swap local search algorithm.
+  /// </summary>
+  /// <param name="currentSolution">The current solution.</param>
+  /// <returns>The new solution.</returns>
   public static VectorsDistance Search(VectorsDistance currentSolution) {
     VectorsDistance bestSolution = new VectorsDistance(currentSolution);
     VectorsDistance newSolution;
