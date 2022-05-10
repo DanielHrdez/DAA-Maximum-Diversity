@@ -9,7 +9,15 @@
 using MaximumDiversityProblem.DataStructure;
 
 namespace MaximumDiversityProblem.IO;
+
+/// <summary>
+/// Class that reads the vectors file.
+/// </summary>
 public class ReadVectorsFile {
+  /// <summary>
+  /// Reads the vectors file.
+  /// </summary>
+  /// <param name="filePath">The file path.</param>
   public static Vectors Read(string filePath) {
     string[] lines = File.ReadAllLines(filePath);
     Vectors vectors = new Vectors(int.Parse(lines[0]), int.Parse(lines[1]));
