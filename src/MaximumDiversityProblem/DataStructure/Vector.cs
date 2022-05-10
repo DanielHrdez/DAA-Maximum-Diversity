@@ -7,16 +7,24 @@
 /// <class>Vector</class>
 
 namespace MaximumDiversityProblem.DataStructure;
+
+/// <summary>
+/// Class that represents a vector.
+/// </summary>
 public class Vector {
   private List<double> vector;
 
-  /**
-    * Constructor of the class
-    */
+  /// <summary>
+  /// Default Constructor of the class.
+  /// </summary>
   public Vector() {
     this.vector = new List<double>();
   }
 
+  /// <summary>
+  /// Constructor of the class.
+  /// </summary>
+  /// <param name="vector">Vector.</param>
   public Vector(double[] vector) {
     this.vector = new List<double>();
     foreach (double value in vector) {
@@ -24,6 +32,10 @@ public class Vector {
     }
   }
 
+  /// <summary>
+  /// Constructor of the class.
+  /// </summary>
+  /// <param name="numebrElements">Number of elements.</param>
   public Vector(int numberElements) {
     this.vector = new List<double>();
     for (int i = 0; i < numberElements; i++) {
@@ -31,12 +43,21 @@ public class Vector {
     }
   }
 
+  /// <summary>
+  /// Gets the number of elements.
+  /// </summary>
+  /// <returns>Number of elements.</returns>
   public int Count {
     get {
       return this.vector.Count;
     }
   }
 
+  /// <summary>
+  /// Override of the [] operator.
+  /// </summary>
+  /// <param name="index">Index.</param>
+  /// <returns>Element at the index.</returns>
   public double this[int index] {
     get {
       return this.vector[index];
@@ -46,6 +67,11 @@ public class Vector {
     }
   }
 
+  /// <summary>
+  /// Calculates the distance between two vectors.
+  /// </summary>
+  /// <param name="vector">Vector.</param>
+  /// <returns>Distance between the two vectors.</returns>
   public double Distance(Vector vector) {
     double sum = 0;
     for (int i = 0; i < this.Count; i++) {
@@ -55,6 +81,10 @@ public class Vector {
     return Math.Sqrt(sum);
   }
 
+  /// <summary>
+  /// String representation of the vector.
+  /// </summary>
+  /// <returns>String representation of the vector.</returns>
   public override string ToString() {
     string result = "[";
     foreach (double value in this.vector) {
@@ -63,13 +93,5 @@ public class Vector {
     result = result.Substring(0, result.Length - 2);
     result += "]";
     return result;
-  }
-
-  public Vector Clone() {
-    Vector vector = new Vector(this.Count);
-    for (int i = 0; i < this.Count; i++) {
-      vector[i] = this[i];
-    }
-    return vector;
   }
 }
