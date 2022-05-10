@@ -15,7 +15,7 @@ public class VectorsDistance {
   private Vectors vectors;
   private double distance;
   private List<bool> indices;
-  private Vectors solution;
+  private int length;
   
   /// <summary>
   /// Default Constructor of the class.
@@ -23,8 +23,8 @@ public class VectorsDistance {
   public VectorsDistance() {
     this.distance = 0;
     this.indices = new List<bool>();
-    this.solution = new Vectors();
     this.vectors = new Vectors();
+    this.length = 0;
   }
 
   /// <summary>
@@ -37,8 +37,8 @@ public class VectorsDistance {
     for (int i = 0; i < vectors.Count; i++) {
       this.indices.Add(false);
     }
-    this.solution = new Vectors();
     this.vectors = new Vectors(vectors);
+    this.length = 0;
   }
 
   /// <summary>
@@ -57,8 +57,8 @@ public class VectorsDistance {
   public VectorsDistance(VectorsDistance vectorsDistance) {
     this.distance = vectorsDistance.distance;
     this.indices = new List<bool>(vectorsDistance.indices);
-    this.solution = new Vectors(vectorsDistance.solution);
     this.vectors = new Vectors(vectorsDistance.vectors);
+    this.length = vectorsDistance.length;
   }
 
   /// <summary>
@@ -69,14 +69,34 @@ public class VectorsDistance {
   public bool AddVector(Vector vector) {
     int index = this.vectors.IndexOf(vector);
     if (index != -1) {
-      this.indices[index] = true;
-      for (int i = 0; i < this.solution.Count; i++) {
-        this.distance += vector.Distance(this.solution[i]);
+      for (int i = 0; i < this.vectors.Count; i++) {
+        if (this.indices[i]) {
+          this.distance += vector.Distance(this.vectors[i]);
+        }
       }
-      this.solution.AddVector(vector);
+      this.indices[index] = true;
+      this.length++;
       return true;
     }
     return false;
+  }
+
+  /// <summary>
+  /// Adds a vector to the solution.
+  /// </summary>
+  /// <param name="index">Vector.</param>
+  /// <param name="ignore">Vector to ignore.</param>
+  /// <returns>True if the vector was added, false otherwise.</returns>
+  public bool AddVector(int index, int ignore) {
+    Vector vector = this.vectors[index];
+    for (int i = 0; i < this.vectors.Count; i++) {
+      if (this.indices[i] && i != ignore) {
+        this.distance += vector.Distance(this.vectors[i]);
+      }
+    }
+    this.indices[index] = true;
+    this.length++;
+    return true;
   }
 
   /// <summary>
@@ -88,13 +108,33 @@ public class VectorsDistance {
     int index = this.vectors.IndexOf(vector);
     if (index != -1) {
       this.indices[index] = false;
-      this.solution.RemoveVector(vector);
-      for (int i = 0; i < this.solution.Count; i++) {
-        this.distance -= vector.Distance(this.solution[i]);
+      for (int i = 0; i < this.vectors.Count; i++) {
+        if (this.indices[i]) {
+          this.distance -= vector.Distance(this.vectors[i]);
+        }
       }
+      this.length--;
       return true;
     }
     return false;
+  }
+
+  /// <summary>
+  /// Removes a vector from the solution.
+  /// </summary>
+  /// <param name="index">Vector.</param>
+  /// <param name="ignore">Vector to ignore.</param>
+  /// <returns>True if the vector was removed, false otherwise.</returns>
+  private bool RemoveVector(int index, int ignore) {
+    Vector vector = this.vectors[index];
+    this.indices[index] = false;
+    for (int i = 0; i < this.vectors.Count; i++) {
+      if (this.indices[i] && i != ignore) {
+        this.distance -= vector.Distance(this.vectors[i]);
+      }
+    }
+    this.length--;
+    return true;
   }
 
   /// <summary>
@@ -105,8 +145,8 @@ public class VectorsDistance {
   /// <returns>A copy of the vectors with the swapped vectors.</returns>
   public VectorsDistance Swap(int index1, int index2) {
     VectorsDistance newSolution = new VectorsDistance(this);
-    newSolution.AddVector(this.vectors[index1]);
-    newSolution.RemoveVector(this.vectors[index2]);
+    newSolution.AddVector(index1, index2);
+    newSolution.RemoveVector(index2, index1);
     return newSolution;
   }
 
@@ -139,7 +179,7 @@ public class VectorsDistance {
   /// <returns>Length of the solution.</returns>
   public int LengthSolution {
     get {
-      return this.solution.Count;
+      return this.length;
     }
   }
 
@@ -150,6 +190,16 @@ public class VectorsDistance {
   public List<bool> Indices {
     get {
       return this.indices;
+    }
+  }
+
+  /// <summary>
+  /// Getter of the number of components.
+  /// </summary>
+  /// <returns>Number of components.</returns>
+  public int Components {
+    get {
+      return this.vectors.Components;
     }
   }
 
@@ -165,7 +215,14 @@ public class VectorsDistance {
     }
     indices = indices.Substring(0, indices.Length - 2);
     indices += "]";
-    return ToGreen("Vectors:") + $"\n{this.solution.ToString()}\n" +
+    string vectorString = "";
+    for (int i = 0; i < this.vectors.Count; i++) {
+      if (this.indices[i]) {
+        vectorString += this.vectors[i].ToString() + '\n';
+      }
+    }
+    vectorString = vectorString.Substring(0, vectorString.Length - 1);
+    return ToGreen("Vectors:") + $"\n{vectorString}\n" +
         ToGreen("Indices:") + $"\n{indices}\n" +
         ToGreen("Distance:") + $"\n{distance}\n";
   }
@@ -184,10 +241,19 @@ public class VectorsDistance {
   /// </summary>
   /// <returns>Center of the solution.</returns>
   public Vector Center() {
-    if (this.solution.Count == 0) {
+    if (this.length == 0) {
       return this.vectors.Center();
     }
-    return this.solution.Center();
+    Vector center = new Vector(new double[this.Components]);
+    for (int i = 0; i < this.Components; i++) {
+      for (int j = 0; j < this.Count; j++) {
+        if (this.indices[j]) {
+          center[i] += this.vectors[j, i];
+        }
+      }
+      center[i] /= this.length;
+    }
+    return center;
   }
 
   /// <summary>
@@ -207,6 +273,18 @@ public class VectorsDistance {
   public bool this[int index] {
     get {
       return this.indices[index];
+    }
+  }
+
+  /// <summary>
+  /// Override of the [,] operator.
+  /// </summary>
+  /// <param name="index1">Index1 of the vector.</param>
+  /// <param name="index2">Index2 of the vector.</param>
+  /// <returns>Vector.</returns>
+  public bool this[int index1, int index2] {
+    get {
+      return this.indices[index1] || !this.indices[index2];
     }
   }
 }
