@@ -88,7 +88,7 @@ public class Vector {
   public override string ToString() {
     string result = "[";
     foreach (double value in this.vector) {
-      result += value.ToString().Replace(",", ".") + ", ";
+      result += value.ToString("0.00").Replace(",", ".") + ", ";
     }
     result = result.Substring(0, result.Length - 2);
     result += "]";
