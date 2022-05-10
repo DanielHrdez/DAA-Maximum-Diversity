@@ -7,12 +7,19 @@
 /// <class>VectorsDistance</class>
 
 namespace MaximumDiversityProblem.DataStructure;
+
+/// <summary>
+/// Class that represents vectors with distances.
+/// </summary>
 public class VectorsDistance {
   private Vectors vectors;
   private double distance;
   private List<bool> indices;
   private Vectors solution;
   
+  /// <summary>
+  /// Default Constructor of the class.
+  /// </summary>
   public VectorsDistance() {
     this.distance = 0;
     this.indices = new List<bool>();
@@ -20,6 +27,10 @@ public class VectorsDistance {
     this.vectors = new Vectors();
   }
 
+  /// <summary>
+  /// Constructor of the class.
+  /// </summary>
+  /// <param name="vectors">Vectors.</param>
   public VectorsDistance(Vectors vectors) {
     this.distance = 0;
     this.indices = new List<bool>();
@@ -30,10 +41,19 @@ public class VectorsDistance {
     this.vectors = new Vectors(vectors);
   }
 
+  /// <summary>
+  /// Constructor of the class.
+  /// </summary>
+  /// <param name="vectors">Vectors.</param>
+  /// <param name="distance">Distance of the vectors.</param>
   public VectorsDistance(Vectors vectors, double distance) : this(vectors) {
     this.distance = distance;
   }
 
+  /// <summary>
+  /// Constructor of the class.
+  /// </summary>
+  /// <param name="vectorsDistance">Vectors with distances.</param>
   public VectorsDistance(VectorsDistance vectorsDistance) {
     this.distance = vectorsDistance.distance;
     this.indices = new List<bool>(vectorsDistance.indices);
@@ -41,6 +61,10 @@ public class VectorsDistance {
     this.vectors = new Vectors(vectorsDistance.vectors);
   }
 
+  /// <summary>
+  /// Adds a vector to the solution.
+  /// </summary>
+  /// <param name="vector">Vector.</param>
   public bool AddVector(Vector vector) {
     int index = this.vectors.IndexOf(vector);
     if (index != -1) {
@@ -54,13 +78,10 @@ public class VectorsDistance {
     return false;
   }
 
-  public VectorsDistance Swap(int index1, int index2) {
-    VectorsDistance newSolution = new VectorsDistance(this);
-    newSolution.AddVector(this.vectors[index1]);
-    newSolution.RemoveVector(this.vectors[index2]);
-    return newSolution;
-  }
-
+  /// <summary>
+  /// Removes a vector from the solution.
+  /// </summary>
+  /// <param name="vector">Vector.</param>
   private bool RemoveVector(Vector vector) {
     int index = this.vectors.IndexOf(vector);
     if (index != -1) {
@@ -74,12 +95,30 @@ public class VectorsDistance {
     return false;
   }
 
+  /// <summary>
+  /// Swaps two vectors from the total with the solution.
+  /// </summary>
+  /// <param name="index1">Index of the first vector.</param>
+  /// <param name="index2">Index of the second vector.</param>
+  public VectorsDistance Swap(int index1, int index2) {
+    VectorsDistance newSolution = new VectorsDistance(this);
+    newSolution.AddVector(this.vectors[index1]);
+    newSolution.RemoveVector(this.vectors[index2]);
+    return newSolution;
+  }
+
+  /// <summary>
+  /// Getter of the number of vectors.
+  /// </summary>
   public int Count {
     get {
       return this.vectors.Count;
     }
   }
 
+  /// <summary>
+  /// Getter and Setter of the distance.
+  /// </summary>
   public double Distance {
     get {
       return this.distance;
@@ -89,18 +128,27 @@ public class VectorsDistance {
     }
   }
 
+  /// <summary>
+  /// Getter of the length of the solution.
+  /// </summary>
   public int LengthSolution {
     get {
       return this.solution.Count;
     }
   }
 
+  /// <summary>
+  /// Getter of the Indices of the solution.
+  /// </summary>
   public List<bool> Indices {
     get {
       return this.indices;
     }
   }
 
+  /// <summary>
+  /// String representation of the class.
+  /// </summary>
   public override string ToString() {
     string distance = this.distance.ToString().Replace(",", ".");
     string indices = "[";
@@ -114,6 +162,9 @@ public class VectorsDistance {
         $"\u001b[32mDistance:\u001b[0m\n{distance}\n";
   }
 
+  /// <summary>
+  /// Return the center of the solution.
+  /// </summary>
   public Vector Center() {
     if (this.solution.Count == 0) {
       return this.vectors.Center();
@@ -121,10 +172,17 @@ public class VectorsDistance {
     return this.solution.Center();
   }
 
+  /// <summary>
+  /// Return the farthest vector from the given vector.
+  /// </summary>
+  /// <param name="from">Vector.</param>
   public Vector FarthestFrom(Vector from) {
     return this.vectors.FarthestFrom(from, this.indices);
   }
 
+  /// <summary>
+  /// Override of the [] operator.
+  /// </summary>
   public bool this[int index] {
     get {
       return this.indices[index];
