@@ -165,9 +165,18 @@ public class VectorsDistance {
     }
     indices = indices.Substring(0, indices.Length - 2);
     indices += "]";
-    return $"\u001b[32mVectors:\u001b[0m\n{this.solution.ToString()}\n" +
-        $"\u001b[32mIndices:\u001b[0m\n{indices}\n" +
-        $"\u001b[32mDistance:\u001b[0m\n{distance}\n";
+    return ToGreen("Vectors:") + $"\n{this.solution.ToString()}\n" +
+        ToGreen("Indices:") + $"\n{indices}\n" +
+        ToGreen("Distance:") + $"\n{distance}\n";
+  }
+
+  /// <summary>
+  /// Converts to green.
+  /// </summary>
+  /// <param name="text">Text to be converted.</param>
+  /// <returns>Text in green.</returns>
+  private static string ToGreen(string text) {
+    return $"\u001b[32m{text}\u001b[0m";
   }
 
   /// <summary>

@@ -15,10 +15,12 @@ MaximumDiversity maximumDiversity = new MaximumDiversity(
     "Greedy"
 );
 
-VectorsDistance solution = maximumDiversity.Run(4);
+VectorsDistance solution = maximumDiversity.Run(5);
 
+Console.WriteLine("\u001b[31mGREEDY\u001b[0m");
 Console.WriteLine(solution);
 
 VectorsDistance swapped = Swap.Search(solution);
 
+Console.WriteLine("\u001b[31mLOCAL_SEARCH\u001b[0m");
 Console.WriteLine(swapped);
