@@ -26,12 +26,12 @@ public abstract class Algorithm {
     this.vectors = new VectorsDistance(vectors);
   }
 
-  public abstract VectorsDistance Run(int maxParameter);
+  public abstract VectorsDistance Run(int maxLength);
 
-  protected void CheckParameters(int maxParameter) {
-    if (maxParameter < 1 || maxParameter >= this.vectors.Count) {
+  protected void CheckParameters(int maxLength) {
+    if (maxLength < 1 || maxLength >= this.vectors.Count) {
       throw new System.ArgumentException(
-          "maxParameter must be greater than 0 " +
+          "maxLength must be greater than 0 " +
           "and less than the number of vectors"
       );
     }

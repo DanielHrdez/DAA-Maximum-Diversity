@@ -82,7 +82,7 @@ public class Vectors : IEnumerable {
     return this.vectors.GetEnumerator();
   }
 
-  public (Vector, double) FarthestFrom(Vector from) {
+  public Vector FarthestFrom(Vector from) {
     Vector farthest = new Vector(this.Components);
     double maxDistance = Double.MinValue;
     foreach (Vector vector in this.vectors) {
@@ -92,7 +92,21 @@ public class Vectors : IEnumerable {
         farthest = vector;
       }
     }
-    return (farthest, maxDistance);
+    return farthest;
+  }
+
+  public Vector FarthestFrom(Vector from, List<bool> ignore) {
+    Vector farthest = new Vector(this.Components);
+    double maxDistance = Double.MinValue;
+    for (int i = 0; i < this.vectors.Count; i++) {
+      if (ignore[i]) continue;
+      double distance = this.vectors[i].Distance(from);
+      if (distance > maxDistance) {
+        maxDistance = distance;
+        farthest = this.vectors[i];
+      }
+    }
+    return farthest;
   }
 
   public Vector Center() {
@@ -116,5 +130,9 @@ public class Vectors : IEnumerable {
 
   public int IndexOf(Vector vector) {
     return this.vectors.IndexOf(vector);
+  }
+
+  public Vector Last() {
+    return this.vectors.Last();
   }
 }

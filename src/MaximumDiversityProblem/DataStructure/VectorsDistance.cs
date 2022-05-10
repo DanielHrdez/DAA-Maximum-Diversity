@@ -37,12 +37,44 @@ public class VectorsDistance {
     this.distance = distance;
   }
 
-  public void AddVector(Vector vector) {
+  public VectorsDistance(VectorsDistance vectorsDistance) {
+    this.distance = vectorsDistance.distance;
+    this.indices = new List<bool>(vectorsDistance.indices);
+    this.solution = new Vectors(vectorsDistance.solution);
+    this.vectors = new Vectors(vectorsDistance.vectors);
+  }
+
+  public bool AddVector(Vector vector) {
     int index = this.vectors.IndexOf(vector);
     if (index != -1) {
       this.indices[index] = true;
+      for (int i = 0; i < this.solution.Count; i++) {
+        this.distance += vector.Distance(this.solution[i]);
+      }
       this.solution.AddVector(vector);
+      return true;
     }
+    return false;
+  }
+
+  public VectorsDistance Swap(int index1, int index2) {
+    VectorsDistance newSolution = new VectorsDistance(this);
+    newSolution.AddVector(this.vectors[index1]);
+    newSolution.RemoveVector(this.vectors[index2]);
+    return newSolution;
+  }
+
+  private bool RemoveVector(Vector vector) {
+    int index = this.vectors.IndexOf(vector);
+    if (index != -1) {
+      this.indices[index] = false;
+      this.solution.RemoveVector(vector);
+      for (int i = 0; i < this.solution.Count; i++) {
+        this.distance += vector.Distance(this.solution[i]);
+      }
+      return true;
+    }
+    return false;
   }
 
   public int Count {
@@ -84,14 +116,19 @@ public class VectorsDistance {
   }
 
   public Vector Center() {
-    return this.vectors.Center();
+    if (this.solution.Count == 0) {
+      return this.vectors.Center();
+    }
+    return this.solution.Center();
   }
 
-  public (Vector, double) FarthestFrom(Vector from) {
-    return this.vectors.FarthestFrom(from);
+  public Vector FarthestFrom(Vector from) {
+    return this.vectors.FarthestFrom(from, this.indices);
   }
 
-  public bool RemoveVector(Vector vector) {
-    return this.vectors.RemoveVector(vector);
+  public bool this[int index] {
+    get {
+      return this.indices[index];
+    }
   }
 }

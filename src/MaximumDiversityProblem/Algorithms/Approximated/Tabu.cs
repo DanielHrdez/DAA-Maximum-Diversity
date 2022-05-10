@@ -12,7 +12,7 @@ using MaximumDiversityProblem.DataStructure;
 
 namespace MaximumDiversityProblem.Algorithms.Approximated;
 public class Tabu : Algorithm {
-  override public VectorsDistance Run(int maxParameter) {
+  override public VectorsDistance Run(int maxLength) {
     return this.vectors;
   }
 }

@@ -12,7 +12,18 @@ using MaximumDiversityProblem.DataStructure;
 
 namespace MaximumDiversityProblem.Algorithms.Approximated.LocalSearch;
 public class Swap {
-  // public static VectorsDistance Search(Vectors indices, Vectors all) {
-  //   var vectors = new Vectors(indices);
-  // }
+  public static VectorsDistance Search(VectorsDistance currentSolution) {
+    VectorsDistance bestSolution = new VectorsDistance(currentSolution);
+    VectorsDistance newSolution;
+    for (int i = 0; i < currentSolution.Count; i++) {
+      for (int j = 0; j < currentSolution.Count; j++) {
+        if (i == j || !currentSolution[j]) continue;
+        newSolution = currentSolution.Swap(i, j);
+        if (newSolution.Distance > bestSolution.Distance) {
+          bestSolution = new VectorsDistance(newSolution);
+        }
+      }
+    }
+    return bestSolution;
+  }
 }
