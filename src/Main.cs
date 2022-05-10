@@ -11,7 +11,7 @@ using MaximumDiversityProblem.DataStructure;
 using MaximumDiversityProblem.Algorithms.Approximated.LocalSearch;
 
 MaximumDiversity maximumDiversity = new MaximumDiversity(
-    "data/max_div_20_3.txt",
+    "data/max_div_15_2.txt",
     "Greedy"
 );
 
