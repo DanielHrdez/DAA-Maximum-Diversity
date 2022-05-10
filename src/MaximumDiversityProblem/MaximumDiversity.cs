@@ -11,6 +11,10 @@ using MaximumDiversityProblem.Algorithms;
 using MaximumDiversityProblem.IO;
 
 namespace MaximumDiversityProblem;
+
+/// <summary>
+/// Class that implements the Maximum Diversity Problem.
+/// </summary>
 public class MaximumDiversity {
   private Algorithm algorithm;
 
@@ -25,15 +29,27 @@ public class MaximumDiversity {
   }
 
   /// <summary>
+  /// Constructor of the class.
+  /// </summary>
+  /// <param name="vectorsFilePath">The path of the file containing the vectors.</param>
+  /// <param name="algorithmName">The name of the algorithm to use.</param>
   public MaximumDiversity(string vectorsFilePath, string algorithmName) : this(
       ReadVectorsFile.Read(vectorsFilePath),
       algorithmName
   ) {}
 
-  public VectorsDistance Run(int maxParameter) {
-    return this.algorithm.Run(maxParameter);
+  /// <summary>
+  /// Runs the algorithm.
+  /// </summary>
+  /// <param name="maxLength">The maximum length of the solution.</param>
+  public VectorsDistance Run(int maxLength) {
+    return this.algorithm.Run(maxLength);
   }
 
+  /// <summary>
+  /// Sets the algorithm to use.
+  /// </summary>
+  /// <param name="algorithmName">The name of the algorithm to use.</param>
   private void SetAlgorithm(string algorithmName) {
     Type algorithmType;
     try {
