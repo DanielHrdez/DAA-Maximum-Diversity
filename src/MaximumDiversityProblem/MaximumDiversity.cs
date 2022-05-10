@@ -1,12 +1,10 @@
-/**
- * Universidad de La Laguna
- * Escuela Superior de Ingeniería y Tecnología
- * Grado en Ingeniería Informática
- * Diseño y Análisis de Algoritmos
- * @author Daniel Hernandez de Leon
- * @date 08/05/2022
- * MaximumDiversity class
- */
+/// Universidad de La Laguna
+/// Escuela Superior de Ingeniería y Tecnología
+/// Grado en Ingeniería Informática
+/// Diseño y Análisis de Algoritmos
+/// <author>Daniel Hernandez de Leon</author>
+/// <date>08/05/2022</date>
+/// <class>MaximumDiversity</class>
 
 using MaximumDiversityProblem.DataStructure;
 using MaximumDiversityProblem.Algorithms;
@@ -16,14 +14,17 @@ namespace MaximumDiversityProblem;
 public class MaximumDiversity {
   private Algorithm algorithm;
 
-  /**
-    * Constructor of the class
-    */
+  /// <summary>
+  /// Constructor of the class.
+  /// </summary>
+  /// <param name="problem">The problem to solve.</param>
+  /// <param name="algorithmName">The name of the algorithm to use.</param>
   public MaximumDiversity(Vectors problem, string algorithmName) {
     this.SetAlgorithm(algorithmName);
     this.algorithm!.SetVectors(problem);
   }
 
+  /// <summary>
   public MaximumDiversity(string vectorsFilePath, string algorithmName) : this(
       ReadVectorsFile.Read(vectorsFilePath),
       algorithmName

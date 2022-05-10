@@ -1,13 +1,10 @@
-/**
- * Universidad de La Laguna
- * Escuela Superior de Ingeniería y Tecnología
- * Grado en Ingeniería Informática
- * Diseño y Análisis de Algoritmos
- * @author Daniel Hernandez de Leon
- * @date 08/05/2022
- * VectorsDistance class
- */
-
+/// Universidad de La Laguna
+/// Escuela Superior de Ingeniería y Tecnología
+/// Grado en Ingeniería Informática
+/// Diseño y Análisis de Algoritmos
+/// <author>Daniel Hernandez de Leon</author>
+/// <date>08/05/2022</date>
+/// <class>VectorsDistance</class>
 
 namespace MaximumDiversityProblem.DataStructure;
 public class VectorsDistance {
