@@ -23,7 +23,7 @@ public class WriteCSV {
     using (StreamWriter writer = File.CreateText(filename)) {
       foreach (List<string> result in results) {
         for (int i = 0; i < result.Count; i++) {
-          result[i] = result[i].Replace(DELIMITER, ".").Replace("\n", "").Replace("\r", "");
+          result[i] = result[i].Replace(DELIMITER, ".").Replace(". ", "").Replace("\n", "").Replace("\r", "");
           writer.Write(result[i] + DELIMITER);
         }
         writer.WriteLine();
@@ -47,7 +47,7 @@ public class WriteCSV {
   public static void Add(string filename, List<string> result) {
     using (StreamWriter file = File.AppendText(filename)) {
       for (int i = 0; i < result.Count; i++) {
-        result[i] = result[i].Replace(DELIMITER, ".").Replace("\n", "").Replace("\r", "");
+        result[i] = result[i].Replace(DELIMITER, ".").Replace(". ", "").Replace("\n", "").Replace("\r", "");
         file.Write(result[i] + DELIMITER);
       }
       file.WriteLine();
