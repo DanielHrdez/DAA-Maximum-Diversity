@@ -13,7 +13,13 @@ namespace MaximumDiversityProblem.Algorithms.Approximated;
 /// <summary>
 /// Class that represents the grasp algorithm.
 /// </summary>
-public class Grasp : Algorithm {
+public class Grasp : Approximated {
+  private int candidates;
+
+  public Grasp(Vectors vectors, int candidates, int iterations) : base(vectors, iterations) {
+    this.candidates = candidates;
+  }
+
   /// <summary>
   /// Runs the grasp search algorithm.
   /// </summary>

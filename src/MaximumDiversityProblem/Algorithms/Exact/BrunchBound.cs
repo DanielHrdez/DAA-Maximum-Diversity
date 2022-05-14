@@ -8,7 +8,7 @@
 
 using MaximumDiversityProblem.DataStructure;
 
-namespace MaximumDiversityProblem.Algorithms.Approximated;
+namespace MaximumDiversityProblem.Algorithms.Exact;
 
 /// <summary>
 /// Class that represents the brunch bound algorithm.

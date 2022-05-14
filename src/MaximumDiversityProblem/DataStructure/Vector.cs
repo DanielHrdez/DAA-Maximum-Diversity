@@ -12,13 +12,13 @@ namespace MaximumDiversityProblem.DataStructure;
 /// Class that represents a vector.
 /// </summary>
 public class Vector {
-  private List<double> vector;
+  private double[] vector;
 
   /// <summary>
   /// Default Constructor of the class.
   /// </summary>
   public Vector() {
-    this.vector = new List<double>();
+    this.vector = new double[0];
   }
 
   /// <summary>
@@ -26,9 +26,9 @@ public class Vector {
   /// </summary>
   /// <param name="vector">Vector.</param>
   public Vector(double[] vector) {
-    this.vector = new List<double>();
-    foreach (double value in vector) {
-      this.vector.Add(value);
+    this.vector = new double[vector.Length];
+    for (int i = 0; i < vector.Length; i++) {
+      this.vector[i] = vector[i];
     }
   }
 
@@ -37,10 +37,7 @@ public class Vector {
   /// </summary>
   /// <param name="numebrElements">Number of elements.</param>
   public Vector(int numberElements) {
-    this.vector = new List<double>();
-    for (int i = 0; i < numberElements; i++) {
-      this.vector.Add(0);
-    }
+    this.vector = new double[numberElements];
   }
 
   /// <summary>
@@ -49,7 +46,7 @@ public class Vector {
   /// <returns>Number of elements.</returns>
   public int Count {
     get {
-      return this.vector.Count;
+      return this.vector.Length;
     }
   }
 

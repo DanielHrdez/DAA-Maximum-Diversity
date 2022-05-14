@@ -13,7 +13,13 @@ namespace MaximumDiversityProblem.Algorithms.Approximated;
 /// <summary>
 /// Class that represents the tabu search algorithm.
 /// </summary>
-public class Tabu : Algorithm {
+public class Tabu : Approximated {
+  private int tenure;
+
+  public Tabu(Vectors vectors, int tenure, int iterations) : base(vectors, iterations) {
+    this.tenure = tenure;
+  }
+
   /// <summary>
   /// Runs the tabu search algorithm.
   /// </summary>

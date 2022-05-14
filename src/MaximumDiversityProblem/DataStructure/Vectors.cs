@@ -14,13 +14,13 @@ namespace MaximumDiversityProblem.DataStructure;
 /// Class that represents a set of vectors.
 /// </summary>
 public class Vectors : IEnumerable {
-  public List<Vector> vectors;
+  public Vector[] vectors;
 
   /// <summary>
   /// Constructor of the class.
   /// </summary>
   public Vectors() {
-    this.vectors = new List<Vector>();
+    this.vectors = new Vector[0];
   }
 
   /// <summary>
@@ -28,7 +28,10 @@ public class Vectors : IEnumerable {
   /// </summary>
   /// <param name="vectors">Vectors.</param>
   public Vectors(Vectors vectors) {
-    this.vectors = new List<Vector>(vectors.vectors);
+    this.vectors = new Vector[vectors.Count];
+    for (int i = 0; i < vectors.Count; i++) {
+      this.vectors[i] = vectors[i];
+    }
   }
 
   /// <summary>
@@ -37,27 +40,10 @@ public class Vectors : IEnumerable {
   /// <param name="numberVectors">Number of vectors.</param>
   /// <param name="numberElements">Number of elements.</param>
   public Vectors(int numberVectors, int numberElements) {
-    this.vectors = new List<Vector>();
+    this.vectors = new Vector[numberVectors];
     for (int i = 0; i < numberVectors; i++) {
-      this.vectors.Add(new Vector(numberElements));
+      this.vectors[i] = new Vector(numberElements);
     }
-  }
-
-  /// <summary>
-  /// Adds a vector to the set.
-  /// </summary>
-  /// <param name="vector">Vector.</param>
-  public void AddVector(Vector vector) {
-    this.vectors.Add(vector);
-  }
-
-  /// <summary>
-  /// Removes a vector from the set.
-  /// </summary>
-  /// <param name="vector">Vector.</param>
-  /// <returns>True if the vector was removed, false otherwise.</returns>
-  public bool RemoveVector(Vector vector) {
-    return this.vectors.Remove(vector);
   }
 
   /// <summary>
@@ -66,7 +52,7 @@ public class Vectors : IEnumerable {
   /// <returns>Number of vectors.</returns>
   public int Count {
     get {
-      return this.vectors.Count;
+      return this.vectors.Length;
     }
   }
 
@@ -153,10 +139,10 @@ public class Vectors : IEnumerable {
   /// <param name="from">From vector.</param>
   /// <param name="ignore">List of vectors to ignore.</param>
   /// <returns>Farthest vector.</returns>
-  public Vector FarthestFrom(Vector from, List<bool> ignore) {
+  public Vector FarthestFrom(Vector from, bool[] ignore) {
     Vector farthest = new Vector(this.Components);
     double maxDistance = Double.MinValue;
-    for (int i = 0; i < this.vectors.Count; i++) {
+    for (int i = 0; i < this.vectors.Length; i++) {
       if (ignore[i]) continue;
       double distance = this.vectors[i].Distance(from);
       if (distance > maxDistance) {
@@ -172,7 +158,7 @@ public class Vectors : IEnumerable {
   /// </summary>
   /// <returns>Center of the vectors.</returns>
   public Vector Center() {
-    Vector center = new Vector(new double[this.Components]);
+    Vector center = new Vector(this.Components);
     for (int i = 0; i < this.Components; i++) {
       for (int j = 0; j < this.Count; j++) {
         center[i] += this.vectors[j][i];
@@ -188,6 +174,11 @@ public class Vectors : IEnumerable {
   /// <param name="vector">Vector.</param>
   /// <returns>Index of the given vector.</returns>
   public int IndexOf(Vector vector) {
-    return this.vectors.IndexOf(vector);
+    for (int i = 0; i < this.Count; i++) {
+      if (this.vectors[i].Equals(vector)) {
+        return i;
+      }
+    }
+    return -1;
   }
 }

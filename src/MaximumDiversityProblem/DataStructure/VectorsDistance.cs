@@ -14,7 +14,7 @@ namespace MaximumDiversityProblem.DataStructure;
 public class VectorsDistance {
   private Vectors vectors;
   private double distance;
-  private List<bool> indices;
+  private bool[] indices;
   private int length;
   
   /// <summary>
@@ -22,7 +22,7 @@ public class VectorsDistance {
   /// </summary>
   public VectorsDistance() {
     this.distance = 0;
-    this.indices = new List<bool>();
+    this.indices = new bool[0];
     this.vectors = new Vectors();
     this.length = 0;
   }
@@ -33,10 +33,7 @@ public class VectorsDistance {
   /// <param name="vectors">Vectors.</param>
   public VectorsDistance(Vectors vectors) {
     this.distance = 0;
-    this.indices = new List<bool>();
-    for (int i = 0; i < vectors.Count; i++) {
-      this.indices.Add(false);
-    }
+    this.indices = new bool[vectors.Count];
     this.vectors = new Vectors(vectors);
     this.length = 0;
   }
@@ -56,7 +53,10 @@ public class VectorsDistance {
   /// <param name="vectorsDistance">Vectors with distances.</param>
   public VectorsDistance(VectorsDistance vectorsDistance) {
     this.distance = vectorsDistance.distance;
-    this.indices = new List<bool>(vectorsDistance.indices);
+    this.indices = new bool[vectorsDistance.indices.Length];
+    for (int i = 0; i < vectorsDistance.indices.Length; i++) {
+      this.indices[i] = vectorsDistance.indices[i];
+    }
     this.vectors = new Vectors(vectorsDistance.vectors);
     this.length = vectorsDistance.length;
   }
@@ -187,7 +187,7 @@ public class VectorsDistance {
   /// Getter of the Indices of the solution.
   /// </summary>
   /// <returns>Indices of the solution.</returns>
-  public List<bool> Indices {
+  public bool[] Indices {
     get {
       return this.indices;
     }
