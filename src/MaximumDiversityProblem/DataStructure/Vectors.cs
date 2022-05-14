@@ -138,19 +138,50 @@ public class Vectors : IEnumerable {
   /// </summary>
   /// <param name="from">From vector.</param>
   /// <param name="ignore">List of vectors to ignore.</param>
-  /// <returns>Farthest vector.</returns>
-  public Vector FarthestFrom(Vector from, bool[] ignore) {
-    Vector farthest = new Vector(this.Components);
+  /// <returns>Farthest vector position.</returns>
+  public int FarthestFrom(Vector from, bool[] ignore) {
     double maxDistance = Double.MinValue;
+    int position = -1;
     for (int i = 0; i < this.vectors.Length; i++) {
       if (ignore[i]) continue;
       double distance = this.vectors[i].Distance(from);
       if (distance > maxDistance) {
         maxDistance = distance;
-        farthest = this.vectors[i];
+        position = i;
       }
     }
-    return farthest;
+    return position;
+  }
+
+  /// <summary>
+  /// Gets the farthest vectors from the given vector.
+  /// </summary>
+  /// <param name="from">From vector.</param>
+  /// <param name="ignore">List of vectors to ignore.</param>
+  /// <returns>Farthest vectors position.</returns>
+  public int[] FarthestsFrom(Vector from, bool[] ignore, int number) {
+    bool[] ignoreCopy = new bool[ignore.Length];
+    for (int i = 0; i < ignore.Length; i++) {
+      ignoreCopy[i] = ignore[i];
+    }
+    int[] positions = new int[number];
+    for (int i = 0; i < number; i++) {
+      positions[i] = -1;
+    }
+    double maxDistance = Double.MinValue;
+    for (int i = 0; i < number; i++) {
+      for (int j = 0; j < this.vectors.Length; j++) {
+        if (ignoreCopy[j]) continue;
+        double distance = this.vectors[j].Distance(from);
+        if (distance > maxDistance) {
+          maxDistance = distance;
+          positions[i] = j;
+        }
+      }
+      ignoreCopy[positions[i]] = true;
+      maxDistance = Double.MinValue;
+    }
+    return positions;
   }
 
   /// <summary>

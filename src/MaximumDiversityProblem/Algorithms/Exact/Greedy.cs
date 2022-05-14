@@ -14,18 +14,17 @@ namespace MaximumDiversityProblem.Algorithms.Exact;
 /// Greedy algorithm.
 /// </summary>
 public class Greedy : Algorithm {
+  public Greedy() : base() {}
+
   /// <summary>
   /// Runs the algorithm.
   /// </summary>
-  /// <param name="maxLength">The maximum length.</param>
   /// <returns>The vectors distance.</returns>
-  public override VectorsDistance Run(int maxLength) {
-    this.CheckParameters(maxLength);
-    Vector center = this.vectors.Center();
-    while (this.vectors.LengthSolution != maxLength) {
-      Vector farthest = this.vectors.FarthestFrom(center);
+  public override VectorsDistance Run() {
+    while (this.vectors.LengthSolution != this.maxLength) {
+      Vector center = this.vectors.Center();
+      int farthest = this.vectors.FarthestFrom(center);
       this.vectors.AddVector(farthest);
-      center = this.vectors.Center();
     }
     return this.vectors;
   }

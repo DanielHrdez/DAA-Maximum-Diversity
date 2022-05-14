@@ -14,20 +14,25 @@ namespace MaximumDiversityProblem.Algorithms;
 /// Abstract class that represents an algorithm.
 public abstract class Algorithm {
   protected VectorsDistance vectors;
+  protected int maxLength;
 
   /// <summary>
   /// Constructor of the class.
   /// </summary>
   public Algorithm() {
     this.vectors = new VectorsDistance();
+    this.maxLength = 0;
   }
 
   /// <summary>
   /// Constructor of the class.
   /// </summary>
   /// <param name="vectors">Vectors to be used.</param>
-  public Algorithm(Vectors vectors) {
+  /// <param name="maxLength">Maximum length of the solution.</param>
+  public Algorithm(Vectors vectors, int maxLength) {
     this.vectors = new VectorsDistance(vectors);
+    this.maxLength = maxLength;
+    this.CheckParameters();
   }
 
   /// <summary>
@@ -38,19 +43,21 @@ public abstract class Algorithm {
     this.vectors = new VectorsDistance(vectors);
   }
 
+  public void SetMaxLength(int maxLength) {
+    this.maxLength = maxLength;
+  }
+
   /// <summary>
   /// Runs the algorithm.
   /// </summary>
-  /// <param name="maxLength">Maximum length of the solution.</param>
   /// <returns>The solution.</returns>
-  public abstract VectorsDistance Run(int maxLength);
+  public abstract VectorsDistance Run();
 
   /// <summary>
   /// Check if max length is valid.
   /// </summary>
-  /// <param name="maxLength">Maximum length of the solution.</param>
-  protected void CheckParameters(int maxLength) {
-    if (maxLength < 1 || maxLength >= this.vectors.Count) {
+  protected void CheckParameters() {
+    if (this.maxLength < 1 || this.maxLength >= this.vectors.Count) {
       throw new System.ArgumentException(
           "maxLength must be greater than 0 " +
           "and less than the number of vectors"

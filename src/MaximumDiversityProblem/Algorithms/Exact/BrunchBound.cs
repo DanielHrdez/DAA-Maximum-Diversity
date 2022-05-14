@@ -17,9 +17,8 @@ public class BrunchBound : Algorithm {
   /// <summary>
   /// Runs the BrunchBound search algorithm.
   /// </summary>
-  /// <param name="maxLength">The maximum length of the solution.</param>
   /// <returns>The vectors distance.</returns>
-  public override VectorsDistance Run(int maxLength) {
+  public override VectorsDistance Run() {
     return this.vectors;
   }
 }

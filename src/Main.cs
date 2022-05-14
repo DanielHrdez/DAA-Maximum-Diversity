@@ -8,19 +8,19 @@
 
 using MaximumDiversityProblem;
 using MaximumDiversityProblem.DataStructure;
-using MaximumDiversityProblem.Algorithms.Approximated.LocalSearch;
 
 MaximumDiversity maximumDiversity = new MaximumDiversity(
     "data/max_div_15_2.txt",
     "Greedy"
 );
 
-VectorsDistance solution = maximumDiversity.Run(5);
+VectorsDistance greedy = maximumDiversity.Run(3);
 
 Console.WriteLine("\u001b[31mGREEDY\u001b[0m");
-Console.WriteLine(solution);
+Console.WriteLine(greedy);
 
-VectorsDistance swapped = Swap.Search(solution);
+maximumDiversity.SetAlgorithm("Grasp", new object[] {2, 10});
+VectorsDistance grasp = maximumDiversity.Run(3);
 
 Console.WriteLine("\u001b[31mLOCAL_SEARCH\u001b[0m");
-Console.WriteLine(swapped);
+Console.WriteLine(grasp);

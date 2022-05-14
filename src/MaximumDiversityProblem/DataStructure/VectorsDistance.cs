@@ -61,17 +61,22 @@ public class VectorsDistance {
     this.length = vectorsDistance.length;
   }
 
+  public Vectors Vectors {
+    get {
+      return this.vectors;
+    }
+  }
+
   /// <summary>
   /// Adds a vector to the solution.
   /// </summary>
-  /// <param name="vector">Vector.</param>
+  /// <param name="index">Vector position.</param>
   /// <returns>True if the vector was added, false otherwise.</returns>
-  public bool AddVector(Vector vector) {
-    int index = this.vectors.IndexOf(vector);
+  public bool AddVector(int index) {
     if (index != -1) {
       for (int i = 0; i < this.vectors.Count; i++) {
         if (this.indices[i]) {
-          this.distance += vector.Distance(this.vectors[i]);
+          this.distance += this.vectors[index].Distance(this.vectors[i]);
         }
       }
       this.indices[index] = true;
@@ -97,26 +102,6 @@ public class VectorsDistance {
     this.indices[index] = true;
     this.length++;
     return true;
-  }
-
-  /// <summary>
-  /// Removes a vector from the solution.
-  /// </summary>
-  /// <param name="vector">Vector.</param>
-  /// <returns>True if the vector was removed, false otherwise.</returns>
-  private bool RemoveVector(Vector vector) {
-    int index = this.vectors.IndexOf(vector);
-    if (index != -1) {
-      this.indices[index] = false;
-      for (int i = 0; i < this.vectors.Count; i++) {
-        if (this.indices[i]) {
-          this.distance -= vector.Distance(this.vectors[i]);
-        }
-      }
-      this.length--;
-      return true;
-    }
-    return false;
   }
 
   /// <summary>
@@ -260,9 +245,19 @@ public class VectorsDistance {
   /// Return the farthest vector from the given vector.
   /// </summary>
   /// <param name="from">Vector.</param>
-  /// <returns>Farthest vector from the given vector.</returns>
-  public Vector FarthestFrom(Vector from) {
+  /// <returns>Farthest vector position from the given vector.</returns>
+  public int FarthestFrom(Vector from) {
     return this.vectors.FarthestFrom(from, this.indices);
+  }
+  
+  /// <summary>
+  /// Return the farthests vectors from the given vector.
+  /// </summary>
+  /// <param name="from">Vector.</param>
+  /// <param name="numberVectors">Number of Vectors.</param>
+  /// <returns>Farthests vector positions from the given vector.</returns>
+  public int[] FarthestsFrom(Vector from, int numberVectors) {
+    return this.vectors.FarthestsFrom(from, this.indices, numberVectors);
   }
 
   /// <summary>

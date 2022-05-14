@@ -17,6 +17,7 @@ namespace MaximumDiversityProblem;
 /// </summary>
 public class MaximumDiversity {
   private Algorithm algorithm;
+  private Vectors problem;
 
   /// <summary>
   /// Constructor of the class.
@@ -24,6 +25,7 @@ public class MaximumDiversity {
   /// <param name="problem">The problem to solve.</param>
   /// <param name="algorithmName">The name of the algorithm to use.</param>
   public MaximumDiversity(Vectors problem, string algorithmName) {
+    this.problem = problem;
     this.SetAlgorithm(algorithmName);
     this.algorithm!.SetVectors(problem);
   }
@@ -44,14 +46,16 @@ public class MaximumDiversity {
   /// <param name="maxLength">The maximum length of the solution.</param>
   /// <returns>The solution.</returns>
   public VectorsDistance Run(int maxLength) {
-    return this.algorithm.Run(maxLength);
+    this.algorithm.SetMaxLength(maxLength);
+    return this.algorithm.Run();
   }
 
   /// <summary>
   /// Sets the algorithm to use.
   /// </summary>
   /// <param name="algorithmName">The name of the algorithm to use.</param>
-  private void SetAlgorithm(string algorithmName) {
+  /// <param name="params_">The params of the algorithm to use.</param>
+  public void SetAlgorithm(string algorithmName, object?[]? params_ = null) {
     Type algorithmType;
     try {
       algorithmType = System.Type.GetType("MaximumDiversityProblem.Algorithms.Exact." + algorithmName)!;
@@ -69,11 +73,16 @@ public class MaximumDiversity {
         );
       }
     }
-    this.algorithm = (Algorithm) System.Activator.CreateInstance(algorithmType)!;
+    if (params_ != null) {
+      this.algorithm = (Algorithm) System.Activator.CreateInstance(algorithmType, params_)!;
+    } else {
+      this.algorithm = (Algorithm) System.Activator.CreateInstance(algorithmType)!;
+    }
     if (this.algorithm == null) {
       throw new System.ArgumentException(
           "The algorithm \u001b[31m" + algorithmName + "\u001b[0m does not exist"
       );
     }
+    this.algorithm!.SetVectors(this.problem);
   }
 }
