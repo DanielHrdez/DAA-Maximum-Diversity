@@ -84,19 +84,35 @@ public class MaximumDiversity {
     this.algorithm!.SetVectors(this.problem);
   }
 
+  /// <summary>
+  /// Gets the algorithm to name.
+  /// </summary>
+  /// <returns>The name of the algorithm.</returns>
   public string GetAlgorithmName() {
     return this.algorithm.ToString();
   }
 
+  /// <summary>
+  /// Sets the vectors to use.
+  /// </summary>
+  /// <param name="vector">The vector to use.</param>
   public void SetVectors(Vectors vectors) {
     this.problem = vectors;
     this.algorithm!.SetVectors(vectors);
   }
 
+  /// <summary>
+  /// Gets the algorithm.
+  /// </summary>
+  /// <returns>The algorithm.</returns>
   public Algorithm GetAlgorithm() {
     return this.algorithm;
   }
 
+  /// <summary>
+  /// Gets the vectors.
+  /// </summary>
+  /// <returns>The vectors.</returns>
   public Vectors GetVectors() {
     return this.problem;
   }
