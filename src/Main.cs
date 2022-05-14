@@ -19,13 +19,13 @@ VectorsDistance greedy = maximumDiversity.Run(5);
 Console.WriteLine("\u001b[31mGREEDY\u001b[0m");
 Console.WriteLine(greedy);
 
-maximumDiversity.SetAlgorithm("Grasp", new object[] {10, 10000});
+maximumDiversity.SetAlgorithm("Grasp", new object[] {2, 10});
 VectorsDistance grasp = maximumDiversity.Run(5);
 
 Console.WriteLine("\u001b[31mGRASP\u001b[0m");
 Console.WriteLine(grasp);
 
-maximumDiversity.SetAlgorithm("Tabu", new object[] {10, 10000});
+maximumDiversity.SetAlgorithm("Tabu", new object[] {2, 10});
 VectorsDistance tabu = maximumDiversity.Run(5);
 
 Console.WriteLine("\u001b[31mTABU\u001b[0m");
