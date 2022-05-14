@@ -22,11 +22,16 @@ public class WriteCSV {
   public static void Write(string filename, List<List<string>> results) {
     using (StreamWriter writer = File.CreateText(filename)) {
       foreach (List<string> result in results) {
+        string finalResult = "";
         for (int i = 0; i < result.Count; i++) {
-          result[i] = result[i].Replace(DELIMITER, ".").Replace(". ", "").Replace("\n", "").Replace("\r", "");
-          writer.Write(result[i] + DELIMITER);
+          finalResult += result[i]
+              .Replace(DELIMITER, ".")
+              .Replace(". ", " ")
+              .Replace("\n", "")
+              .Replace("\r", "") + DELIMITER;
         }
-        writer.WriteLine();
+        finalResult = finalResult.Substring(0, finalResult.Length - 1);
+        writer.WriteLine(finalResult);
       }
     }
   }
@@ -46,11 +51,16 @@ public class WriteCSV {
   /// <param name="result">The line to add.</param>
   public static void Add(string filename, List<string> result) {
     using (StreamWriter file = File.AppendText(filename)) {
-      for (int i = 0; i < result.Count; i++) {
-        result[i] = result[i].Replace(DELIMITER, ".").Replace(". ", "").Replace("\n", "").Replace("\r", "");
-        file.Write(result[i] + DELIMITER);
-      }
-      file.WriteLine();
+      string finalResult = "";
+        for (int i = 0; i < result.Count; i++) {
+          finalResult += result[i]
+              .Replace(DELIMITER, ".")
+              .Replace(". ", " ")
+              .Replace("\n", "")
+              .Replace("\r", "") + DELIMITER;
+        }
+        finalResult = finalResult.Substring(0, finalResult.Length - 1);
+        file.WriteLine(finalResult);
     }
   }
 }
