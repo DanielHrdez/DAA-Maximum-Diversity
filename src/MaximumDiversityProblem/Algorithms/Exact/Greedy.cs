@@ -14,7 +14,16 @@ namespace MaximumDiversityProblem.Algorithms.Exact;
 /// Greedy algorithm.
 /// </summary>
 public class Greedy : Algorithm {
+  /// <summary>
+  /// Default constructor.
+  /// </summary>
   public Greedy() : base() {}
+
+  /// <summary>
+  /// Constructor with algorithm.
+  /// </summary>
+  /// <param name="algorithm">Algorithm type.</param>
+  public Greedy(Algorithm algorithm) : base(algorithm) {}
 
   /// <summary>
   /// Runs the algorithm.

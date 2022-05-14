@@ -10,17 +10,23 @@ using MaximumDiversityProblem;
 using MaximumDiversityProblem.DataStructure;
 
 MaximumDiversity maximumDiversity = new MaximumDiversity(
-    "data/max_div_15_2.txt",
+    "data/max_div_30_3.txt",
     "Greedy"
 );
 
-VectorsDistance greedy = maximumDiversity.Run(3);
+VectorsDistance greedy = maximumDiversity.Run(5);
 
 Console.WriteLine("\u001b[31mGREEDY\u001b[0m");
 Console.WriteLine(greedy);
 
-maximumDiversity.SetAlgorithm("Grasp", new object[] {2, 10});
-VectorsDistance grasp = maximumDiversity.Run(3);
+maximumDiversity.SetAlgorithm("Grasp", new object[] {10, 10000});
+VectorsDistance grasp = maximumDiversity.Run(5);
 
-Console.WriteLine("\u001b[31mLOCAL_SEARCH\u001b[0m");
+Console.WriteLine("\u001b[31mGRASP\u001b[0m");
 Console.WriteLine(grasp);
+
+maximumDiversity.SetAlgorithm("Tabu", new object[] {10, 10000});
+VectorsDistance tabu = maximumDiversity.Run(5);
+
+Console.WriteLine("\u001b[31mTABU\u001b[0m");
+Console.WriteLine(tabu);

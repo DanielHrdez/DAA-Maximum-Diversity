@@ -27,6 +27,15 @@ public abstract class Algorithm {
   /// <summary>
   /// Constructor of the class.
   /// </summary>
+  /// <param name="algorithm">Algorithm to be used.</param>
+  public Algorithm(Algorithm algorithm) {
+    this.vectors = algorithm.vectors;
+    this.maxLength = algorithm.maxLength;
+  }
+
+  /// <summary>
+  /// Constructor of the class.
+  /// </summary>
   /// <param name="vectors">Vectors to be used.</param>
   /// <param name="maxLength">Maximum length of the solution.</param>
   public Algorithm(Vectors vectors, int maxLength) {
@@ -43,6 +52,10 @@ public abstract class Algorithm {
     this.vectors = new VectorsDistance(vectors);
   }
 
+  /// <summary>
+  /// Sets the max length of the solution.
+  /// </summary>
+  /// <param name="maxLength">Max length of the solution.</param>
   public void SetMaxLength(int maxLength) {
     this.maxLength = maxLength;
   }

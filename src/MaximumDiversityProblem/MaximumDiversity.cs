@@ -58,26 +58,24 @@ public class MaximumDiversity {
   public void SetAlgorithm(string algorithmName, object?[]? params_ = null) {
     Type algorithmType;
     try {
-      algorithmType = System.Type.GetType("MaximumDiversityProblem.Algorithms.Exact." + algorithmName)!;
+      string typeName = "MaximumDiversityProblem.Algorithms.Exact.";
+      algorithmType = System.Type.GetType(typeName + algorithmName)!;
       if (algorithmType == null) {
         throw new System.ArgumentException(
-            "The algorithm \u001b[31m" + algorithmName + "\u001b[0m does not exist in Exact Algorithms."
+            "The algorithm \u001b[31m" + algorithmName +
+            "\u001b[0m does not exist in Exact Algorithms"
         );
       }
     } catch (System.ArgumentException e) {
-      algorithmType = System.Type.GetType("MaximumDiversityProblem.Algorithms.Approximated." + algorithmName)!;
+      string typeName = "MaximumDiversityProblem.Algorithms.Approximated.";
+      algorithmType = System.Type.GetType(typeName + algorithmName)!;
       if (algorithmType == null) {
         throw new System.ArgumentException(
-            e.Message +
-            "\nThe algorithm \u001b[31m" + algorithmName + "\u001b[0m does not exist in Approximated Algorithms."
+            e.Message + "or in Approximated Algorithms"
         );
       }
     }
-    if (params_ != null) {
-      this.algorithm = (Algorithm) System.Activator.CreateInstance(algorithmType, params_)!;
-    } else {
-      this.algorithm = (Algorithm) System.Activator.CreateInstance(algorithmType)!;
-    }
+    this.algorithm = (Algorithm) System.Activator.CreateInstance(algorithmType, params_)!;
     if (this.algorithm == null) {
       throw new System.ArgumentException(
           "The algorithm \u001b[31m" + algorithmName + "\u001b[0m does not exist"

@@ -7,20 +7,22 @@
 /// <enum>Grasp</enum>
 
 using MaximumDiversityProblem.DataStructure;
-using MaximumDiversityProblem.Algorithms.Exact;
 
 namespace MaximumDiversityProblem.Algorithms.Approximated;
 
 /// <summary>
 /// Class that represents the grasp algorithm.
 /// </summary>
-public class Grasp : Algorithm {
+public class Grasp : Approximated {
   private int candidates;
-  private int iterations;
 
-  public Grasp(int candidates, int iterations) : base() {
+  /// <summary>
+  /// Constructor of the Grasp class.
+  /// </summary>
+  /// <param name="candidates">The number of candidates.</param>
+  /// <param name="iterations">The number of iterations.</param>
+  public Grasp(int candidates, int iterations) : base(iterations) {
     this.candidates = candidates;
-    this.iterations = iterations;
   }
 
   /// <summary>
@@ -30,7 +32,7 @@ public class Grasp : Algorithm {
   public override VectorsDistance Run() {
     for (int i = 0; i < this.iterations; i++) {
       VectorsDistance solution = this.RandomGreedy();
-      solution = this.Search();
+      solution = this.Search(solution);
       if (solution.Distance > this.vectors.Distance) {
         this.vectors = solution;
       }
@@ -38,6 +40,10 @@ public class Grasp : Algorithm {
     return this.vectors;
   }
 
+  /// <summary>
+  /// Runs the random greedy algorithm.
+  /// </summary>
+  /// <returns>The vectors distance.</returns>
   private VectorsDistance RandomGreedy() {
     VectorsDistance solution = new VectorsDistance(this.vectors.Vectors);
     while (solution.LengthSolution != this.maxLength) {
