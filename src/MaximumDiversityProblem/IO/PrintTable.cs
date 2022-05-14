@@ -46,7 +46,7 @@ public class PrintTable {
       Console.Write(separator);
       if (color) Console.ForegroundColor = ConsoleColor.Cyan;
       string value = row[i];
-      if (value.Length > spaces) value = value.Substring(0, spaces - 3) + "...";
+      if (value.Length >= spaces) value = value.Substring(0, spaces - 3) + "...";
       Console.Write(stringFormat, value);
       Console.ResetColor();
     }
@@ -87,9 +87,9 @@ public class PrintTable {
   /// </summary>
   /// <param name="title"> The title of the table.</param>
   public static void PrintTitle(string title) {
-    Console.Write("\u001B[1m");
-    Console.WriteLine("{0,40}" + title, "");
-    Console.Write("\u001B[0m");
+    int spaces = (Console.WindowWidth * 90 / 100) / 2 - title.Length / 2;
+    Console.Write("{0," + spaces + "}", " ");
+    Console.WriteLine("\u001B[1;4m" + title + "\u001B[0m");
   }
 
   /// <summary>
