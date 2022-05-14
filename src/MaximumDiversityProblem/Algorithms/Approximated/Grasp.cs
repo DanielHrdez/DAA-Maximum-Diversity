@@ -25,6 +25,10 @@ public class Grasp : Approximated {
     this.candidates = candidates;
   }
 
+  public void SetCandidates(int candidates) {
+    this.candidates = candidates;
+  }
+
   /// <summary>
   /// Runs the grasp search algorithm.
   /// </summary>

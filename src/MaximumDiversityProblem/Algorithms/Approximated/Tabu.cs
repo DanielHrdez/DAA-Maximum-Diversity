@@ -28,6 +28,10 @@ public class Tabu : Approximated {
     this.tabuList = new List<VectorsDistance>();
   }
 
+  public void SetMaxTabuList(int maxTabuList) {
+    this.maxTabuList = maxTabuList;
+  }
+
   /// <summary>
   /// Runs the tabu search algorithm.
   /// </summary>

@@ -45,4 +45,8 @@ public abstract class Approximated : Algorithm {
   protected VectorsDistance Search(VectorsDistance solution) {
     return this.localSearch.Search(solution);
   }
+
+  public void SetMaxIterations(int iterations) {
+    this.iterations = iterations;
+  }
 }

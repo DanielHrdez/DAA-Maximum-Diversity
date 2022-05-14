@@ -67,6 +67,19 @@ public class VectorsDistance {
     }
   }
 
+  public string VectorsSolution {
+    get {
+      string vectorString = "";
+      for (int i = 0; i < this.vectors.Count; i++) {
+        if (this.indices[i]) {
+          vectorString += this.vectors[i].ToString() + '\n';
+        }
+      }
+      vectorString = vectorString.Substring(0, vectorString.Length - 1);
+      return vectorString;
+    }
+  }
+
   /// <summary>
   /// Adds a vector to the solution.
   /// </summary>
@@ -200,14 +213,7 @@ public class VectorsDistance {
     }
     indices = indices.Substring(0, indices.Length - 2);
     indices += "]";
-    string vectorString = "";
-    for (int i = 0; i < this.vectors.Count; i++) {
-      if (this.indices[i]) {
-        vectorString += this.vectors[i].ToString() + '\n';
-      }
-    }
-    vectorString = vectorString.Substring(0, vectorString.Length - 1);
-    return ToGreen("Vectors:") + $"\n{vectorString}\n" +
+    return ToGreen("Vectors:") + $"\n{this.VectorsSolution}\n" +
         ToGreen("Indices:") + $"\n{indices}\n" +
         ToGreen("Distance:") + $"\n{distance}\n";
   }

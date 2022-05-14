@@ -77,4 +77,8 @@ public abstract class Algorithm {
       );
     }
   }
+
+  public override string ToString() {
+    return this.GetType().Name;
+  }
 }
