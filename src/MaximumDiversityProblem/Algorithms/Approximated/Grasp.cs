@@ -19,6 +19,13 @@ public class Grasp : Approximated {
   /// <summary>
   /// Constructor of the Grasp class.
   /// </summary>
+  public Grasp() : base() {
+    this.candidates = 0;
+  }
+
+  /// <summary>
+  /// Constructor of the Grasp class.
+  /// </summary>
   /// <param name="candidates">The number of candidates.</param>
   /// <param name="iterations">The number of iterations.</param>
   public Grasp(int candidates, int iterations) : base(iterations) {

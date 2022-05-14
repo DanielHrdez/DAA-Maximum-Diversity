@@ -96,4 +96,8 @@ public class MaximumDiversity {
   public Algorithm GetAlgorithm() {
     return this.algorithm;
   }
+
+  public Vectors GetVectors() {
+    return this.problem;
+  }
 }

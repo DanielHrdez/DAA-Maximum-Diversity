@@ -12,7 +12,7 @@ namespace MaximumDiversityProblem.IO;
 /// This class writes the solution of the problem in a csv file.
 /// </summary>
 public class WriteCSV {
-  private static char DELIMITER = ',';
+  private static string DELIMITER = ",";
 
   /// <summary>
   /// Writes the solution of the problem in a csv file.
@@ -22,8 +22,9 @@ public class WriteCSV {
   public static void Write(string filename, List<List<string>> results) {
     using (StreamWriter writer = File.CreateText(filename)) {
       foreach (List<string> result in results) {
-        foreach (string value in result) {
-          writer.Write(value + DELIMITER);
+        for (int i = 0; i < result.Count; i++) {
+          result[i] = result[i].Replace(DELIMITER, ".").Replace("\n", "").Replace("\r", "");
+          writer.Write(result[i] + DELIMITER);
         }
         writer.WriteLine();
       }
@@ -45,8 +46,9 @@ public class WriteCSV {
   /// <param name="result">The line to add.</param>
   public static void Add(string filename, List<string> result) {
     using (StreamWriter file = File.AppendText(filename)) {
-      foreach (string value in result) {
-        file.Write(value + DELIMITER);
+      for (int i = 0; i < result.Count; i++) {
+        result[i] = result[i].Replace(DELIMITER, ".").Replace("\n", "").Replace("\r", "");
+        file.Write(result[i] + DELIMITER);
       }
       file.WriteLine();
     }

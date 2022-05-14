@@ -7,26 +7,15 @@
 /// Main Program
 
 using MaximumDiversityProblem;
-using MaximumDiversityProblem.DataStructure;
+using MaximumDiversityProblem.Benchmark;
 
-MaximumDiversity maximumDiversity = new MaximumDiversity(
-    "data/max_div_30_3.txt",
-    "Greedy"
-);
+string[] algorithms = {"Greedy", "Grasp", "Tabu"};
+string[] files = Directory.GetFiles("data");
+MaximumDiversity[] maximumDiversity = new MaximumDiversity[files.Length * algorithms.Length];
+for (int i = 0; i < algorithms.Length; i++) {
+    for (int j = 0; j < files.Length; j++) {
+        maximumDiversity[i * files.Length + j] = new MaximumDiversity(files[j], algorithms[i]);
+    }
+}
 
-VectorsDistance greedy = maximumDiversity.Run(5);
-
-Console.WriteLine("\u001b[31mGREEDY\u001b[0m");
-Console.WriteLine(greedy);
-
-maximumDiversity.SetAlgorithm("Grasp", new object[] {2, 10});
-VectorsDistance grasp = maximumDiversity.Run(5);
-
-Console.WriteLine("\u001b[31mGRASP\u001b[0m");
-Console.WriteLine(grasp);
-
-maximumDiversity.SetAlgorithm("Tabu", new object[] {2, 10});
-VectorsDistance tabu = maximumDiversity.Run(5);
-
-Console.WriteLine("\u001b[31mTABU\u001b[0m");
-Console.WriteLine(tabu);
+BenchAlgorithm.Run(maximumDiversity);

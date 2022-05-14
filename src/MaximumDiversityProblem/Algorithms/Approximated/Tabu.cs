@@ -21,6 +21,14 @@ public class Tabu : Approximated {
   /// <summary>
   /// Constructor of the tabu search algorithm.
   /// </summary>
+  public Tabu(): base() {
+    this.maxTabuList = 0;
+    this.tabuList = new List<VectorsDistance>();
+  }
+
+  /// <summary>
+  /// Constructor of the tabu search algorithm.
+  /// </summary>
   /// <param name="maxTabuList">The maximum size of the tabu list.</param>
   /// <param name="iterations">The number of iterations.</param>
   public Tabu(int maxTabuList, int iterations): base(iterations) {

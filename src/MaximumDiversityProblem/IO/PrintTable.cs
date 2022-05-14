@@ -40,11 +40,14 @@ public class PrintTable {
   /// <param name="color"> The color of the row.</param>
   public static void PrintRow(List<string> row, bool color) {
     string separator = "│";
-    int spaces = 200 / row.Count;
+    int spaces = Console.WindowWidth * 80 / (100 * row.Count) + 1;
+    string stringFormat = " {0,-" + spaces + "}";
     for (int i = 0; i < row.Count; i++) {
       Console.Write(separator);
       if (color) Console.ForegroundColor = ConsoleColor.Cyan;
-      Console.Write(string.Format("{{0}{1}}", i, spaces), row[i]);
+      string value = row[i];
+      if (value.Length > spaces) value = value.Substring(0, spaces - 3) + "...";
+      Console.Write(stringFormat, value);
       Console.ResetColor();
     }
     Console.WriteLine(separator);
@@ -85,7 +88,7 @@ public class PrintTable {
   /// <param name="title"> The title of the table.</param>
   public static void PrintTitle(string title) {
     Console.Write("\u001B[1m");
-    Console.WriteLine("{40}" + title + "\n", "");
+    Console.WriteLine("{0,40}" + title, "");
     Console.Write("\u001B[0m");
   }
 
@@ -118,10 +121,10 @@ public class PrintTable {
   /// <returns>The line.</params>
   private static string lineSeparator(int size, string start, string interception, string end) {
     string lineSeparator = start;
-    int spaces = 200 / size;
-    for (int i = 0; i < size; i++) {
-      lineSeparator += new string(' ', spaces) + interception;
+    int spaces = Console.WindowWidth * 80 / (100 * size);
+    for (int i = 1; i < size; i++) {
+      lineSeparator += new string('─', spaces) + interception;
     }
-    return lineSeparator + end;
+    return lineSeparator + new string('─', spaces) + end;
   }
 }

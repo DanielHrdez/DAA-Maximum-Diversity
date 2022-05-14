@@ -21,6 +21,14 @@ public abstract class Approximated : Algorithm {
   /// <summary>
   /// Constructor of the class.
   /// </summary>
+  public Approximated() : base() {
+    this.iterations = 0;
+    this.localSearch = new Swap();
+  }
+
+  /// <summary>
+  /// Constructor of the class.
+  /// </summary>
   /// <param name="iterations">Number of iterations.</param>
   public Approximated(int iterations) : base() {
     this.iterations = iterations;
