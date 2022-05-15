@@ -31,22 +31,22 @@ public class BenchAlgorithm {
     for (int index = 0; index < models.Length; index++) {
       string algorithmName = models[index].GetAlgorithmName();
       List<string> header = new List<string>();
-      header.Add("N Vectors");
-      header.Add("Dimension");
-      header.Add("Length sol");
+      header.Add("Number of Vectors");
+      header.Add("Dimension of each Vector");
+      header.Add("Length of the solution");
       if (algorithmName == "Grasp") {
         header.Add("Iterations");
-        header.Add("N Candidates");
+        header.Add("Number of Candidates");
       }
       else if (algorithmName == "Tabu") {
         header.Add("Iterations");
-        header.Add("List size");
+        header.Add("List length");
       }
       header.Add("Dispersión");
       header.Add("Solution");
-      header.Add("CPU (sg)");
+      header.Add("Time CPU (seconds)");
       if (algorithmName == "BrunchBound") {
-        header.Add("Nodos Generados");
+        header.Add("Generated Nodes");
       }
       results.Add(header);
       int maxIterations = 20;
