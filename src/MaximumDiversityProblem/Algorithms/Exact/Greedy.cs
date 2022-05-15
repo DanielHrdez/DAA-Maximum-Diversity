@@ -26,6 +26,16 @@ public class Greedy : Algorithm {
   public Greedy(Algorithm algorithm) : base(algorithm) {}
 
   /// <summary>
+  /// Constructor with algorithm.
+  /// </summary>
+  /// <param name="vectors">Vectors.</param>
+  public Greedy(VectorsDistance vectors, int maxLength) {
+    this.vectors = vectors;
+    this.maxLength = maxLength;
+    this.CheckParameters();
+  }
+
+  /// <summary>
   /// Runs the algorithm.
   /// </summary>
   /// <returns>The vectors distance.</returns>

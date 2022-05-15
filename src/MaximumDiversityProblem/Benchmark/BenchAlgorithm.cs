@@ -45,6 +45,9 @@ public class BenchAlgorithm {
       header.Add("Dispersión");
       header.Add("Solution");
       header.Add("CPU (sg)");
+      if (algorithmName == "BrunchBound") {
+        header.Add("Nodos Generados");
+      }
       results.Add(header);
       int maxIterations = 20;
       int maxLengthVectors = 5;
@@ -72,13 +75,16 @@ public class BenchAlgorithm {
             currentResult.Add(problem.Count.ToString());
             currentResult.Add(problem.Components.ToString());
             currentResult.Add(i.ToString());
-            if (algorithmName != "Greedy") {
+            if (algorithmName == "Grasp" || algorithmName == "Tabu") {
               currentResult.Add(j.ToString());
               currentResult.Add(k.ToString());
             }
             currentResult.Add(result.Distance.ToString());
             currentResult.Add(result.VectorsSolution.Replace("\n", ""));
             currentResult.Add(sw.Elapsed.TotalSeconds.ToString());
+            if (algorithmName == "BrunchBound") {
+              currentResult.Add(((BrunchBound) models[index].GetAlgorithm()).NodesCount.ToString());
+            }
             PrintTable.PrintRow(currentResult, false);
             WriteCSV.Add(filename, currentResult);
             results.Add(currentResult);

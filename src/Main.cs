@@ -9,7 +9,7 @@
 using MaximumDiversityProblem;
 using MaximumDiversityProblem.Benchmark;
 
-string[] algorithms = {"Greedy", "Grasp", "Tabu"};
+string[] algorithms = {"Greedy", "Grasp", "Tabu", "BrunchBound"};
 string[] files = Directory.GetFiles("data");
 MaximumDiversity[] maximumDiversity = new MaximumDiversity[files.Length * algorithms.Length];
 for (int i = 0; i < algorithms.Length; i++) {
