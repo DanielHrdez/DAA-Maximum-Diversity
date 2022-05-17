@@ -36,6 +36,10 @@ public class Tabu : Approximated {
     this.tabuList = new List<VectorsDistance>();
   }
 
+  /// <summary>
+  /// Setter of the maximum size of the tabu list.
+  /// </summary>
+  /// <param name="maxTabuList">The maximum size of the tabu list.</param>
   public void SetMaxTabuList(int maxTabuList) {
     this.maxTabuList = maxTabuList;
   }
