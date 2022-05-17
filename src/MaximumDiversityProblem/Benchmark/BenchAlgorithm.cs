@@ -88,9 +88,15 @@ public class BenchAlgorithm {
             PrintTable.PrintRow(currentResult, false);
             WriteCSV.Add(filename, currentResult);
             results.Add(currentResult);
-            if (algorithmName == "Greedy") break;
+            if (
+              algorithmName == "Greedy" ||
+              algorithmName == "BrunchBound"
+            ) break;
           }
-          if (algorithmName == "Greedy") break;
+          if (
+            algorithmName == "Greedy" ||
+            algorithmName == "BrunchBound"
+          ) break;
         }
       }
       try {
