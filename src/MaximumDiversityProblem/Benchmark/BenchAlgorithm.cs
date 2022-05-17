@@ -42,7 +42,7 @@ public class BenchAlgorithm {
         header.Add("Iterations");
         header.Add("List length");
       }
-      header.Add("Dispersión");
+      header.Add("Dispersion");
       header.Add("Solution");
       header.Add("Time CPU (seconds)");
       if (algorithmName == "BrunchBound") {
