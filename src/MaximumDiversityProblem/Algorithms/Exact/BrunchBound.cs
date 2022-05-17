@@ -18,14 +18,12 @@ public class BrunchBound : Algorithm {
   private int nodesCount;
   private double maxDistance;
   private int numberCombinations;
-  private double[] maxDistances;
 
   public BrunchBound() {
     this.lowerBound = 0;
     this.nodesCount = 0;
     this.maxDistance = 0;
     this.numberCombinations = 0;
-    this.maxDistances = new double[0];
   }
 
   private void SearchMaxDistance() {
@@ -40,28 +38,6 @@ public class BrunchBound : Algorithm {
     }
   }
 
-  private double[] CreateDistanceMatrix() {
-    double[] distanceList = new double[this.vectors.Count * this.vectors.Count];
-    for (int i = 0; i < this.vectors.Count - 1; i++) {
-      for (int j = 1; j < this.vectors.Count; j++) {
-        distanceList[i * this.vectors.Count + j] =
-            this.vectors.Vectors[i].Distance(this.vectors.Vectors[j]);
-      }
-    }
-    return distanceList;
-  }
-
-  private double[] CreateMaxDistances() {
-    double[] distanceList = this.CreateDistanceMatrix();
-    this.maxDistances = new double[this.numberCombinations];
-    Array.Sort(distanceList);
-    int countSq = this.vectors.Count * this.vectors.Count - 1;
-    for (int i = 0; i < this.numberCombinations; i++) {
-      this.maxDistances[i] = distanceList[countSq - i];
-    }
-    return this.maxDistances;
-  }
-
   /// <summary>
   /// Runs the BrunchBound search algorithm.
   /// </summary>
@@ -69,7 +45,6 @@ public class BrunchBound : Algorithm {
   public override VectorsDistance Run() {
     this.numberCombinations = this.Fibonacci(this.maxLength);
     this.SearchMaxDistance();
-    // this.CreateMaxDistances();
     this.vectors = new Greedy(this).Run();
     this.lowerBound = this.vectors.Distance;
     List<VectorsUpperLimit> queue = new List<VectorsUpperLimit>();
@@ -113,11 +88,6 @@ public class BrunchBound : Algorithm {
   private void SetUpperLimit(VectorsUpperLimit vectors) {
     vectors.UpperLimit = vectors.Distance + this.maxDistance *
         (this.numberCombinations - vectors.LengthSolution);
-    // vectors.UpperLimit = vectors.Distance;
-    // int max = this.numberCombinations - vectors.LengthSolution;
-    // for (int i = 0; i < max; i++) {
-    //   vectors.UpperLimit += this.maxDistances[i];
-    // }
   }
 
   private int Fibonacci(int number) {

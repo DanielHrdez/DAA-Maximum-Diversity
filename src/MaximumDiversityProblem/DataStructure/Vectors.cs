@@ -153,6 +153,10 @@ public class Vectors : IEnumerable {
     return position;
   }
 
+  public double Distance(int i, int j) {
+    return this.vectors[i].Distance(this.vectors[j]);
+  }
+
   /// <summary>
   /// Gets the farthest vectors from the given vector.
   /// </summary>
