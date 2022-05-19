@@ -240,9 +240,14 @@ public class VectorsDistance {
   /// </summary>
   /// <returns>Center of the solution.</returns>
   public Vector Center() {
-    if (this.length == 0) {
-      return this.vectors.Center();
-    }
+    return this.vectors.Center();
+  }
+
+  /// <summary>
+  /// Return the center of the solution.
+  /// </summary>
+  /// <returns>Center of the solution.</returns>
+  public Vector Center(bool centerOfSolution) {
     Vector center = new Vector(new double[this.Components]);
     for (int i = 0; i < this.Components; i++) {
       for (int j = 0; j < this.Count; j++) {

@@ -40,9 +40,12 @@ public class Greedy : Algorithm {
   /// </summary>
   /// <returns>The vectors distance.</returns>
   public override VectorsDistance Run() {
+    Vector center = this.vectors.Center();
+    int farthest = this.vectors.FarthestFrom(center);
+    this.vectors.AddVector(farthest);
     while (this.vectors.LengthSolution != this.maxLength) {
-      Vector center = this.vectors.Center();
-      int farthest = this.vectors.FarthestFrom(center);
+      center = this.vectors.Center(true);
+      farthest = this.vectors.FarthestFrom(center);
       this.vectors.AddVector(farthest);
     }
     return this.vectors;

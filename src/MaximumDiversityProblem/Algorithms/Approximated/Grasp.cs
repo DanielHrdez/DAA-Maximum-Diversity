@@ -57,10 +57,14 @@ public class Grasp : Approximated {
   /// <returns>The vectors distance.</returns>
   private VectorsDistance RandomGreedy() {
     VectorsDistance solution = new VectorsDistance(this.vectors.Vectors);
+    Vector center = solution.Center();
+    int[] farthest = solution.FarthestsFrom(center, this.candidates);
+    int random = farthest[new Random().Next(farthest.Length)];
+    solution.AddVector(random);
     while (solution.LengthSolution != this.maxLength) {
-      Vector center = solution.Center();
-      int[] farthest = solution.FarthestsFrom(center, this.candidates);
-      int random = farthest[new Random().Next(farthest.Length)];
+      center = solution.Center(true);
+      farthest = solution.FarthestsFrom(center, this.candidates);
+      random = farthest[new Random().Next(farthest.Length)];
       solution.AddVector(random);
     }
     return solution;
