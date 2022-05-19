@@ -153,8 +153,14 @@ public class Vectors : IEnumerable {
     return position;
   }
 
-  public double Distance(int i, int j) {
-    return this.vectors[i].Distance(this.vectors[j]);
+  /// <summary>
+  /// Gets the distance between two vectors.
+  /// </summary>
+  /// <param name="index1">Index 1.</param>
+  /// <param name="index2">Index 2.</param>
+  /// <returns>Distance.</returns>
+  public double Distance(int index1, int index2) {
+    return this.vectors[index1].Distance(this.vectors[index2]);
   }
 
   /// <summary>

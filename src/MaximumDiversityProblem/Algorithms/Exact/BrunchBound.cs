@@ -19,6 +19,9 @@ public class BrunchBound : Algorithm {
   private double maxDistance;
   private int numberCombinations;
 
+  /// <summary>
+  /// Default Constructor of the class.
+  /// </summary>
   public BrunchBound() {
     this.lowerBound = 0;
     this.nodesCount = 0;
@@ -26,6 +29,9 @@ public class BrunchBound : Algorithm {
     this.numberCombinations = 0;
   }
 
+  /// <summary>
+  /// Search for the maximum distance of the solution.
+  /// </summary>
   private void SearchMaxDistance() {
     this.maxDistance = 0;
     for (int i = 0; i < this.vectors.Count - 1; i++) {
@@ -85,11 +91,20 @@ public class BrunchBound : Algorithm {
     return candidates;
   }
 
+  /// <summary> 
+  /// Set the upper limit of the current solution.
+  /// </summary>
+  /// <param name="vectors">Vectors.</param>
   private void SetUpperLimit(VectorsUpperLimit vectors) {
     vectors.UpperLimit = vectors.Distance + this.maxDistance *
         (this.numberCombinations - vectors.LengthSolution);
   }
 
+  /// <summary>
+  /// Calcs the fibonacci number.
+  /// </summary>
+  /// <param name="number">The number.</param>
+  /// <returns>The fibonacci number.</returns>
   private int Fibonacci(int number) {
     if (number == 2) return 1;
     return this.Fibonacci(number - 1) + number - 1;

@@ -61,12 +61,20 @@ public class VectorsDistance {
     this.length = vectorsDistance.length;
   }
 
+  /// <summary>
+  /// Gets the vectors.
+  /// </summary>
+  /// <returns>Vectors.</returns>
   public Vectors Vectors {
     get {
       return this.vectors;
     }
   }
 
+  /// <summary>
+  /// Gets the string representation of the vectors with distances.
+  /// </summary>
+  /// <returns>String representation of the vectors with distances.</returns>
   public string VectorsSolution {
     get {
       string vectorString = "";

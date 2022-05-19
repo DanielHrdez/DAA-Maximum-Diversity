@@ -14,31 +14,65 @@ namespace MaximumDiversityProblem.DataStructure;
 public class VectorsUpperLimit {
   private VectorsDistance vectors;
   private double upperLimit;
+
+  /// <summary>
+  /// Default Constructor of the class.
+  /// </summary>
   public VectorsUpperLimit() {
     this.vectors = new VectorsDistance();
     this.upperLimit = 0;
   }
+
+  /// <summary>
+  /// Constructor of the class with vectors
+  /// </summary>
+  /// <param name="vectors">Vectors.</param>
   public VectorsUpperLimit(VectorsDistance vectors) : this() {
     this.vectors = new VectorsDistance(vectors);
   }
+
+  /// <summary>
+  /// Adds a vector to the vectors with index
+  /// </summary>
+  /// <param name="index">Index of the vector.</param>
   public void AddVector(int index)  {
     this.vectors.AddVector(index);
   }
+
+  /// <summary>
+  /// Getter of the length of the solution.
+  /// </summary>
+  /// <returns>Length of the solution.</returns>
   public int LengthSolution {
     get {
       return this.vectors.LengthSolution;
     }
   }
+
+  /// <summary>
+  /// Getter of the distance of the solution.
+  /// </summary>
+  /// <returns>Distance of the solution.</returns>
   public double Distance {
     get {
       return this.vectors.Distance;
     }
   }
+
+  /// <summary>
+  /// Getter of the vectors.
+  /// </summary>
+  /// <returns>Vectors.</returns>
   public VectorsDistance Vectors {
     get {
       return this.vectors;
     }
   }
+
+  /// <summary>
+  /// Getter of the upper limit.
+  /// </summary>
+  /// <returns>Upper limit.</returns>
   public double UpperLimit {
     get {
       return this.upperLimit;
