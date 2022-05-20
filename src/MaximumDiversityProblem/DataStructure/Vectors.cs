@@ -15,12 +15,14 @@ namespace MaximumDiversityProblem.DataStructure;
 /// </summary>
 public class Vectors : IEnumerable {
   public Vector[] vectors;
+  public float[][] distanceMatrix;
 
   /// <summary>
   /// Constructor of the class.
   /// </summary>
   public Vectors() {
     this.vectors = new Vector[0];
+    this.distanceMatrix = new float[0][];
   }
 
   /// <summary>
@@ -32,6 +34,7 @@ public class Vectors : IEnumerable {
     for (int i = 0; i < vectors.Count; i++) {
       this.vectors[i] = vectors[i];
     }
+    this.distanceMatrix = vectors.distanceMatrix;
   }
 
   /// <summary>
@@ -43,6 +46,18 @@ public class Vectors : IEnumerable {
     this.vectors = new Vector[numberVectors];
     for (int i = 0; i < numberVectors; i++) {
       this.vectors[i] = new Vector(numberElements);
+    }
+    this.distanceMatrix = new float[numberVectors][];
+    for (int i = 0; i < numberVectors; i++) {
+      this.distanceMatrix[i] = new float[numberVectors];
+    }
+  }
+
+  public void CalcDistanceMatrix() {
+    for (int i = 0; i < this.Count; i++) {
+      for (int j = 0; j < this.Count; j++) {
+        this.distanceMatrix![i][j] = this.vectors![i].Distance(this.vectors[j]);
+      }
     }
   }
 
@@ -86,7 +101,7 @@ public class Vectors : IEnumerable {
   /// <param name="index1">Index 1.</param>
   /// <param name="index2">Index 2.</param>
   /// <returns>Component.</returns>
-  public double this[int index1, int index2] {
+  public float this[int index1, int index2] {
     get {
       return vectors[index1][index2];
     }
@@ -120,17 +135,17 @@ public class Vectors : IEnumerable {
   /// </summary>
   /// <param name="from">From vector.</param>
   /// <returns>Farthest vector.</returns>
-  public Vector FarthestFrom(Vector from) {
-    Vector farthest = new Vector(this.Components);
-    double maxDistance = Double.MinValue;
-    foreach (Vector vector in this.vectors) {
-      double distance = vector.Distance(from);
+  public int FarthestFrom(Vector from) {
+    int position = -1;
+    float maxDistance = float.MinValue;
+    for (int i = 0; i < this.Count; i++) {
+      float distance = this.vectors[i].Distance(from);
       if (distance > maxDistance) {
         maxDistance = distance;
-        farthest = vector;
+        position = i;
       }
     }
-    return farthest;
+    return position;
   }
 
   /// <summary>
@@ -140,11 +155,11 @@ public class Vectors : IEnumerable {
   /// <param name="ignore">List of vectors to ignore.</param>
   /// <returns>Farthest vector position.</returns>
   public int FarthestFrom(Vector from, bool[] ignore) {
-    double maxDistance = Double.MinValue;
+    float maxDistance = float.MinValue;
     int position = -1;
     for (int i = 0; i < this.vectors.Length; i++) {
       if (ignore[i]) continue;
-      double distance = this.vectors[i].Distance(from);
+      float distance = this.vectors[i].Distance(from);
       if (distance > maxDistance) {
         maxDistance = distance;
         position = i;
@@ -159,8 +174,8 @@ public class Vectors : IEnumerable {
   /// <param name="index1">Index 1.</param>
   /// <param name="index2">Index 2.</param>
   /// <returns>Distance.</returns>
-  public double Distance(int index1, int index2) {
-    return this.vectors[index1].Distance(this.vectors[index2]);
+  public float Distance(int index1, int index2) {
+    return this.distanceMatrix[index1][index2];
   }
 
   /// <summary>
@@ -178,18 +193,18 @@ public class Vectors : IEnumerable {
     for (int i = 0; i < number; i++) {
       positions[i] = -1;
     }
-    double maxDistance = Double.MinValue;
+    float maxDistance = float.MinValue;
     for (int i = 0; i < number; i++) {
       for (int j = 0; j < this.vectors.Length; j++) {
         if (ignoreCopy[j]) continue;
-        double distance = this.vectors[j].Distance(from);
+        float distance = this.vectors[j].Distance(from);
         if (distance > maxDistance) {
           maxDistance = distance;
           positions[i] = j;
         }
       }
       ignoreCopy[positions[i]] = true;
-      maxDistance = Double.MinValue;
+      maxDistance = float.MinValue;
     }
     return positions;
   }

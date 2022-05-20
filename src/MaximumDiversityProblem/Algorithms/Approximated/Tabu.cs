@@ -49,6 +49,7 @@ public class Tabu : Approximated {
   /// </summary>
   /// <returns>The vectors distance.</returns>
   public override VectorsDistance Run() {
+    this.vectors = new VectorsDistance(this.vectors.Vectors);
     this.vectors = new Greedy(this).Run();
     VectorsDistance bestCandidate = this.vectors;
     this.tabuList.Add(this.vectors);

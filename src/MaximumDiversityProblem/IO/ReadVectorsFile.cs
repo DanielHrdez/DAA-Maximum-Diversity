@@ -27,9 +27,10 @@ public class ReadVectorsFile {
       lines[i] = lines[i].Replace("\t", " ");
       string[] vector = lines[i].Split(' ');
       for (int j = 0; j < vector.Length; j++) {
-        vectors[i - 2, j] = double.Parse(vector[j]);
+        vectors[i - 2, j] = float.Parse(vector[j]);
       }
     }
+    vectors.CalcDistanceMatrix();
     return vectors;
   }
 }

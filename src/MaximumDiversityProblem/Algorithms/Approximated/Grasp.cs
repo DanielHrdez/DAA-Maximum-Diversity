@@ -62,7 +62,7 @@ public class Grasp : Approximated {
     int random = farthest[new Random().Next(farthest.Length)];
     solution.AddVector(random);
     while (solution.LengthSolution != this.maxLength) {
-      center = solution.Center(true);
+      center = solution.CenterSolution();
       farthest = solution.FarthestsFrom(center, this.candidates);
       random = farthest[new Random().Next(farthest.Length)];
       solution.AddVector(random);

@@ -13,7 +13,7 @@ namespace MaximumDiversityProblem.DataStructure;
 /// </summary>
 public class VectorsDistance {
   private Vectors vectors;
-  private double distance;
+  private float distance;
   private bool[] indices;
   private int length;
   
@@ -43,7 +43,7 @@ public class VectorsDistance {
   /// </summary>
   /// <param name="vectors">Vectors.</param>
   /// <param name="distance">Distance of the vectors.</param>
-  public VectorsDistance(Vectors vectors, double distance) : this(vectors) {
+  public VectorsDistance(Vectors vectors, float distance) : this(vectors) {
     this.distance = distance;
   }
 
@@ -97,7 +97,7 @@ public class VectorsDistance {
     if (index != -1) {
       for (int i = 0; i < this.vectors.Count; i++) {
         if (this.indices[i]) {
-          this.distance += this.vectors[index].Distance(this.vectors[i]);
+          this.distance += this.vectors.Distance(i, index);
         }
       }
       this.indices[index] = true;
@@ -114,10 +114,9 @@ public class VectorsDistance {
   /// <param name="ignore">Vector to ignore.</param>
   /// <returns>True if the vector was added, false otherwise.</returns>
   public bool AddVector(int index, int ignore) {
-    Vector vector = this.vectors[index];
     for (int i = 0; i < this.vectors.Count; i++) {
       if (this.indices[i] && i != ignore) {
-        this.distance += vector.Distance(this.vectors[i]);
+        this.distance += this.vectors.Distance(i, index);
       }
     }
     this.indices[index] = true;
@@ -132,11 +131,10 @@ public class VectorsDistance {
   /// <param name="ignore">Vector to ignore.</param>
   /// <returns>True if the vector was removed, false otherwise.</returns>
   private bool RemoveVector(int index, int ignore) {
-    Vector vector = this.vectors[index];
     this.indices[index] = false;
     for (int i = 0; i < this.vectors.Count; i++) {
       if (this.indices[i] && i != ignore) {
-        this.distance -= vector.Distance(this.vectors[i]);
+        this.distance -= this.vectors.Distance(i, index);
       }
     }
     this.length--;
@@ -170,7 +168,7 @@ public class VectorsDistance {
   /// Getter and Setter of the distance.
   /// </summary>
   /// <returns>Distance.</returns>
-  public double Distance {
+  public float Distance {
     get {
       return this.distance;
     }
@@ -247,8 +245,8 @@ public class VectorsDistance {
   /// Return the center of the solution.
   /// </summary>
   /// <returns>Center of the solution.</returns>
-  public Vector Center(bool centerOfSolution) {
-    Vector center = new Vector(new double[this.Components]);
+  public Vector CenterSolution() {
+    Vector center = new Vector(new float[this.Components]);
     for (int i = 0; i < this.Components; i++) {
       for (int j = 0; j < this.Count; j++) {
         if (this.indices[j]) {
@@ -266,6 +264,15 @@ public class VectorsDistance {
   /// <param name="from">Vector.</param>
   /// <returns>Farthest vector position from the given vector.</returns>
   public int FarthestFrom(Vector from) {
+    return this.vectors.FarthestFrom(from);
+  }
+
+  /// <summary>
+  /// Return the farthest vector from the given vector.
+  /// </summary>
+  /// <param name="from">Vector.</param>
+  /// <returns>Farthest vector position from the given vector.</returns>
+  public int FarthestFromSolution(Vector from) {
     return this.vectors.FarthestFrom(from, this.indices);
   }
   

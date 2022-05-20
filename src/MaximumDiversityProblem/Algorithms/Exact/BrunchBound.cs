@@ -14,9 +14,9 @@ namespace MaximumDiversityProblem.Algorithms.Exact;
 /// Class that represents the brunch bound algorithm.
 /// </summary>
 public class BrunchBound : Algorithm {
-  private double lowerBound;
+  private float lowerBound;
   private int nodesCount;
-  private double maxDistance;
+  private float maxDistance;
   private int numberCombinations;
 
   /// <summary>
@@ -36,7 +36,7 @@ public class BrunchBound : Algorithm {
     this.maxDistance = 0;
     for (int i = 0; i < this.vectors.Count - 1; i++) {
       for (int j = i + 1; j < this.vectors.Count; j++) {
-        double distance = this.vectors.Vectors[i].Distance(this.vectors.Vectors[j]);
+        float distance = this.vectors.Vectors[i].Distance(this.vectors.Vectors[j]);
         if (distance > this.maxDistance) {
           this.maxDistance = distance;
         }

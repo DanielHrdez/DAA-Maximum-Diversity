@@ -12,21 +12,21 @@ namespace MaximumDiversityProblem.DataStructure;
 /// Class that represents a vector.
 /// </summary>
 public class Vector {
-  private double[] vector;
+  private float[] vector;
 
   /// <summary>
   /// Default Constructor of the class.
   /// </summary>
   public Vector() {
-    this.vector = new double[0];
+    this.vector = new float[0];
   }
 
   /// <summary>
   /// Constructor of the class.
   /// </summary>
   /// <param name="vector">Vector.</param>
-  public Vector(double[] vector) {
-    this.vector = new double[vector.Length];
+  public Vector(float[] vector) {
+    this.vector = new float[vector.Length];
     for (int i = 0; i < vector.Length; i++) {
       this.vector[i] = vector[i];
     }
@@ -37,7 +37,7 @@ public class Vector {
   /// </summary>
   /// <param name="numebrElements">Number of elements.</param>
   public Vector(int numberElements) {
-    this.vector = new double[numberElements];
+    this.vector = new float[numberElements];
   }
 
   /// <summary>
@@ -55,7 +55,7 @@ public class Vector {
   /// </summary>
   /// <param name="index">Index.</param>
   /// <returns>Element at the index.</returns>
-  public double this[int index] {
+  public float this[int index] {
     get {
       return this.vector[index];
     }
@@ -69,13 +69,13 @@ public class Vector {
   /// </summary>
   /// <param name="vector">Vector.</param>
   /// <returns>Distance between the two vectors.</returns>
-  public double Distance(Vector vector) {
-    double sum = 0;
+  public float Distance(Vector vector) {
+    float sum = 0;
     for (int i = 0; i < this.Count; i++) {
-      double value = this[i] - vector[i];
+      float value = this[i] - vector[i];
       sum += value * value;
     }
-    return Math.Sqrt(sum);
+    return (float) Math.Sqrt((double) sum);
   }
 
   /// <summary>
@@ -84,7 +84,7 @@ public class Vector {
   /// <returns>String representation of the vector.</returns>
   public override string ToString() {
     string result = "[";
-    foreach (double value in this.vector) {
+    foreach (float value in this.vector) {
       result += value.ToString("0.00").Replace(",", ".") + ", ";
     }
     result = result.Substring(0, result.Length - 2);

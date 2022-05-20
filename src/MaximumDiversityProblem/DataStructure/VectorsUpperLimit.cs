@@ -13,7 +13,7 @@ namespace MaximumDiversityProblem.DataStructure;
 /// </summary>
 public class VectorsUpperLimit {
   private VectorsDistance vectors;
-  private double upperLimit;
+  private float upperLimit;
 
   /// <summary>
   /// Default Constructor of the class.
@@ -53,7 +53,7 @@ public class VectorsUpperLimit {
   /// Getter of the distance of the solution.
   /// </summary>
   /// <returns>Distance of the solution.</returns>
-  public double Distance {
+  public float Distance {
     get {
       return this.vectors.Distance;
     }
@@ -73,7 +73,7 @@ public class VectorsUpperLimit {
   /// Getter of the upper limit.
   /// </summary>
   /// <returns>Upper limit.</returns>
-  public double UpperLimit {
+  public float UpperLimit {
     get {
       return this.upperLimit;
     }
