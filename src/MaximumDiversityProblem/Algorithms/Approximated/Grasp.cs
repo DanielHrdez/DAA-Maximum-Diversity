@@ -32,6 +32,14 @@ public class Grasp : Approximated {
     this.candidates = candidates;
   }
 
+  /// <summary>
+  /// Constructor with algorithm.
+  /// </summary>
+  /// <param name="algorithm">Algorithm type.</param>
+  public Grasp(Algorithm algorithm, int candidates, int iterations) : base(algorithm, iterations) {
+    this.candidates = candidates;
+  }
+
   public void SetCandidates(int candidates) {
     this.candidates = candidates;
   }

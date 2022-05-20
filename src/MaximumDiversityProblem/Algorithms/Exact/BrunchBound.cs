@@ -7,6 +7,7 @@
 /// <enum>BrunchBound</enum>
 
 using MaximumDiversityProblem.DataStructure;
+using MaximumDiversityProblem.Algorithms.Approximated;
 
 namespace MaximumDiversityProblem.Algorithms.Exact;
 
@@ -18,15 +19,29 @@ public class BrunchBound : Algorithm {
   private int nodesCount;
   private float maxDistance;
   private int numberCombinations;
+  private bool useGrasp;
+  private bool strategy;
+  private List<VectorsUpperLimit> queue;
 
   /// <summary>
   /// Default Constructor of the class.
   /// </summary>
-  public BrunchBound() {
+  public BrunchBound() : base() {
     this.lowerBound = 0;
     this.nodesCount = 0;
     this.maxDistance = 0;
     this.numberCombinations = 0;
+    this.useGrasp = false;
+    this.strategy = false;
+    this.queue = new List<VectorsUpperLimit>();
+  }
+
+  public void UseGrasp(bool useGrasp) {
+    this.useGrasp = useGrasp;
+  }
+
+  public void Strategy(bool strategy) {
+    this.strategy = strategy;
   }
 
   /// <summary>
@@ -49,17 +64,19 @@ public class BrunchBound : Algorithm {
   /// </summary>
   /// <returns>The vectors distance.</returns>
   public override VectorsDistance Run() {
+    this.nodesCount = 0;
     this.numberCombinations = this.Fibonacci(this.maxLength);
     this.SearchMaxDistance();
-    this.vectors = new Greedy(this).Run();
+    if (!useGrasp) this.vectors = new Greedy(this).Run();
+    else this.vectors = new Grasp(this, 3, 20).Run();
     this.lowerBound = this.vectors.Distance;
-    List<VectorsUpperLimit> queue = new List<VectorsUpperLimit>();
-    queue.AddRange(
+    this.queue = new List<VectorsUpperLimit>();
+    this.queue.AddRange(
       this.PopulateCandidates(new VectorsDistance(this.vectors.Vectors))
     );
-    while (queue.Count > 0) {
-      VectorsDistance currentVector = this.SelectCandidate(queue);
-      queue.AddRange(this.PopulateCandidates(currentVector));
+    while (this.queue.Count > 0) {
+      VectorsDistance currentVector = this.SelectCandidate();
+      this.queue.AddRange(this.PopulateCandidates(currentVector));
     }
     return this.vectors;
   }
@@ -78,6 +95,12 @@ public class BrunchBound : Algorithm {
           if (candidate.Distance > this.lowerBound) {
             this.vectors = candidate.Vectors;
             this.lowerBound = candidate.Distance;
+            for (int j = 0; j < this.queue.Count; j++) {
+              if (this.queue[j].UpperLimit <= this.lowerBound) {
+                this.queue.RemoveAt(j);
+                j--;
+              }
+            }
           }
         } else {
           this.SetUpperLimit(candidate);
@@ -114,15 +137,21 @@ public class BrunchBound : Algorithm {
   /// Select the maximum candidate.
   /// </summary>
   /// <returns>The vectors with maximum distance.</returns>
-  private VectorsDistance SelectCandidate(List<VectorsUpperLimit> queue) {
-    VectorsUpperLimit candidate = queue[0];
-    for (int i = 1; i < queue.Count; i++) {
-      if (queue[i].Distance > candidate.Distance) {
-        candidate = queue[i];
+  private VectorsDistance SelectCandidate() {
+    if (!this.strategy) {
+      VectorsUpperLimit candidate = this.queue[0];
+      for (int i = 1; i < this.queue.Count; i++) {
+        if (this.queue[i].UpperLimit < candidate.UpperLimit) {
+          candidate = this.queue[i];
+        }
       }
+      this.queue.Remove(candidate);
+      return candidate.Vectors;
+    } else {
+      VectorsUpperLimit candidate = this.queue[0];
+      this.queue.Remove(candidate);
+      return candidate.Vectors;
     }
-    queue.Remove(candidate);
-    return candidate.Vectors;
   }
 
   /// <summary>

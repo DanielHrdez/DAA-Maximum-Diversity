@@ -24,6 +24,7 @@ public class MaximumDiversity {
   /// </summary>
   /// <param name="problem">The problem to solve.</param>
   /// <param name="algorithmName">The name of the algorithm to use.</param>
+  /// <param name="params_">The params of the algorithm to use.</param>
   public MaximumDiversity(Vectors problem, string algorithmName) {
     this.problem = problem;
     this.SetAlgorithm(algorithmName);
@@ -35,10 +36,11 @@ public class MaximumDiversity {
   /// </summary>
   /// <param name="vectorsFilePath">The path of the file containing the vectors.</param>
   /// <param name="algorithmName">The name of the algorithm to use.</param>
-  public MaximumDiversity(string vectorsFilePath, string algorithmName) : this(
-      ReadVectorsFile.Read(vectorsFilePath),
-      algorithmName
-  ) {}
+  /// <param name="params_">The params of the algorithm to use.</param>
+  public MaximumDiversity(
+    string vectorsFilePath,
+    string algorithmName
+  ) : this(ReadVectorsFile.Read(vectorsFilePath), algorithmName) {}
 
   /// <summary>
   /// Runs the algorithm.

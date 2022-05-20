@@ -29,7 +29,7 @@ public abstract class Algorithm {
   /// </summary>
   /// <param name="algorithm">Algorithm to be used.</param>
   public Algorithm(Algorithm algorithm) {
-    this.vectors = algorithm.vectors;
+    this.vectors = new VectorsDistance(algorithm.vectors.Vectors);
     this.maxLength = algorithm.maxLength;
   }
 

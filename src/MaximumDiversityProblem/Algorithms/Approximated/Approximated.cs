@@ -35,6 +35,11 @@ public abstract class Approximated : Algorithm {
     this.localSearch = new Swap();
   }
 
+  public Approximated(Algorithm algorithm, int iterations) : base(algorithm) {
+    this.iterations = iterations;
+    this.localSearch = new Swap();
+  }
+
   /// <summary>
   /// Constructor of the class.
   /// </summary>
