@@ -63,7 +63,7 @@ public class BenchAlgorithm {
       }
       for (int m = 0; m < 2; m++) {
         if (algorithmName == "BrunchBound") {
-          ((BrunchBound) models[index].GetAlgorithm()).Strategy(m != 0);
+          ((BrunchBound) models[index].GetAlgorithm()).UseDepthFirst(m != 0);
         }
         for (int l = 0; l < 2; l++) {
           if (algorithmName == "BrunchBound") {
