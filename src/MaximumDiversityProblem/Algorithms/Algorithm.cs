@@ -52,6 +52,10 @@ public abstract class Algorithm {
     this.vectors = new VectorsDistance(vectors);
   }
 
+  public void ResetVectors() {
+    this.vectors = new VectorsDistance(this.vectors.Vectors);
+  }
+
   /// <summary>
   /// Sets the max length of the solution.
   /// </summary>

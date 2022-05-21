@@ -16,14 +16,14 @@ namespace MaximumDiversityProblem.Algorithms.Approximated;
 /// </summary>
 public class Tabu : Approximated {
   private int maxTabuList;
-  private List<VectorsDistance> tabuList;
+  private Queue<VectorsDistance> tabuList;
 
   /// <summary>
   /// Constructor of the tabu search algorithm.
   /// </summary>
   public Tabu(): base() {
     this.maxTabuList = 0;
-    this.tabuList = new List<VectorsDistance>();
+    this.tabuList = new Queue<VectorsDistance>();
   }
 
   /// <summary>
@@ -33,7 +33,7 @@ public class Tabu : Approximated {
   /// <param name="iterations">The number of iterations.</param>
   public Tabu(int maxTabuList, int iterations): base(iterations) {
     this.maxTabuList = maxTabuList;
-    this.tabuList = new List<VectorsDistance>();
+    this.tabuList = new Queue<VectorsDistance>();
   }
 
   /// <summary>
@@ -52,7 +52,8 @@ public class Tabu : Approximated {
     this.vectors = new VectorsDistance(this.vectors.Vectors);
     this.vectors = new Greedy(this).Run();
     VectorsDistance bestCandidate = this.vectors;
-    this.tabuList.Add(this.vectors);
+    this.tabuList = new Queue<VectorsDistance>();
+    this.tabuList.Enqueue(this.vectors);
     for (int i = 0; i < this.iterations; i++) {
       List<VectorsDistance> neighbors = this.localSearch.Neighbors(bestCandidate);
       bestCandidate = neighbors[0];
@@ -65,9 +66,9 @@ public class Tabu : Approximated {
       if (bestCandidate.Distance > this.vectors.Distance) {
         this.vectors = bestCandidate;
       }
-      this.tabuList.Add(bestCandidate);
+      this.tabuList.Enqueue(bestCandidate);
       if (this.tabuList.Count > this.maxTabuList) {
-        this.tabuList.RemoveAt(0);
+        this.tabuList.Dequeue();
       }
     }
     return this.vectors;

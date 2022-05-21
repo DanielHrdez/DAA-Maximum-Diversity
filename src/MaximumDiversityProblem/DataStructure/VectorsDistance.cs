@@ -94,17 +94,14 @@ public class VectorsDistance {
   /// <param name="index">Vector position.</param>
   /// <returns>True if the vector was added, false otherwise.</returns>
   public bool AddVector(int index) {
-    if (index != -1) {
-      for (int i = 0; i < this.vectors.Count; i++) {
-        if (this.indices[i]) {
-          this.distance += this.vectors.Distance(i, index);
-        }
+    for (int i = 0; i < this.vectors.Count; i++) {
+      if (this.indices[i]) {
+        this.distance += this.vectors.Distance(i, index);
       }
-      this.indices[index] = true;
-      this.length++;
-      return true;
     }
-    return false;
+    this.indices[index] = true;
+    this.length++;
+    return true;
   }
 
   /// <summary>
@@ -265,6 +262,15 @@ public class VectorsDistance {
   /// <returns>Farthest vector position from the given vector.</returns>
   public int FarthestFrom(Vector from) {
     return this.vectors.FarthestFrom(from);
+  }
+
+  /// <summary>
+  /// Return the farthest vector from the given vector.
+  /// </summary>
+  /// <param name="from">Vector.</param>
+  /// <returns>Farthest vector position from the given vector.</returns>
+  public int FarthestFrom(Vector from, bool ignore) {
+    return this.vectors.FarthestFrom(from, this.indices);
   }
 
   /// <summary>

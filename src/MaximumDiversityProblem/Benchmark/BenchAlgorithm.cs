@@ -51,7 +51,7 @@ public class BenchAlgorithm {
         header.Add("Strategy");
       }
       results.Add(header);
-      int maxIterations = 20;
+      int maxIterations = 1000;
       int maxLengthVectors = 5;
       int numberOfColumns = header.Count;
       string filename = string.Format("{0}/{1}.csv", outputFolder, algorithmName);
@@ -71,7 +71,7 @@ public class BenchAlgorithm {
           }
           for (int i = 2; i <= maxLengthVectors; i++) {
             models[index].GetAlgorithm().SetMaxLength(i);
-            for (int j = 10; j <= maxIterations; j *= 2) {
+            for (int j = 1000; j <= maxIterations; j *= 2) {
               if (algorithmName == "Grasp") ((Grasp) models[index].GetAlgorithm()).SetMaxIterations(j);
               if (algorithmName == "Tabu") ((Tabu) models[index].GetAlgorithm()).SetMaxIterations(j);
               for (int k = 2; k <= 3; k++) {
@@ -81,6 +81,7 @@ public class BenchAlgorithm {
                 sw.Start();
                 VectorsDistance result = models[index].Run(i);
                 sw.Stop();
+                models[index].GetAlgorithm().ResetVectors();
                 List<string> currentResult = new List<string>();
                 Vectors problem = models[index].GetVectors();
                 currentResult.Add(problem.Count.ToString());

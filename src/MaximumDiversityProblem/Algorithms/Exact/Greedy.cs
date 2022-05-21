@@ -45,7 +45,7 @@ public class Greedy : Algorithm {
     this.vectors.AddVector(farthest);
     while (this.vectors.LengthSolution != this.maxLength) {
       center = this.vectors.CenterSolution();
-      farthest = this.vectors.FarthestFrom(center);
+      farthest = this.vectors.FarthestFrom(center, true);
       this.vectors.AddVector(farthest);
     }
     return this.vectors;
