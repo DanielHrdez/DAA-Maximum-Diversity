@@ -71,12 +71,11 @@ public class BrunchBound : Algorithm {
     else this.vectors = new Grasp(this, 3, 20).Run();
     this.lowerBound = this.vectors.Distance;
     this.queue = new List<VectorsUpperLimit>();
-    this.queue.AddRange(
-      this.PopulateCandidates(new VectorsDistance(this.vectors.Vectors))
-    );
+    this.PopulateCandidates(new VectorsDistance(this.vectors.Vectors));
     while (this.queue.Count > 0) {
       VectorsDistance currentVector = this.SelectCandidate();
-      this.queue.AddRange(this.PopulateCandidates(currentVector));
+      this.PopulateCandidates(currentVector);
+      nodesCount++;
     }
     return this.vectors;
   }
@@ -85,8 +84,7 @@ public class BrunchBound : Algorithm {
   /// Return all the candidates of the current solution.
   /// </summary>
   /// <returns>A list of vectors distance.</returns>
-  private List<VectorsUpperLimit> PopulateCandidates(VectorsDistance vectors) {
-    List<VectorsUpperLimit> candidates = new List<VectorsUpperLimit>();
+  private void PopulateCandidates(VectorsDistance vectors) {
     for (int i = 0; i < vectors.Count; i++) {
       if (!vectors.Indices[i]) {
         VectorsUpperLimit candidate = new VectorsUpperLimit(vectors);
@@ -105,13 +103,11 @@ public class BrunchBound : Algorithm {
         } else {
           this.SetUpperLimit(candidate);
           if (candidate.UpperLimit > this.lowerBound) {
-            candidates.Add(candidate);
-            nodesCount++;
+            this.queue.Add(candidate);
           }
         }
       }
     }
-    return candidates;
   }
 
   /// <summary> 
@@ -130,7 +126,8 @@ public class BrunchBound : Algorithm {
   /// <returns>The fibonacci number.</returns>
   private int Fibonacci(int number) {
     if (number == 2) return 1;
-    return this.Fibonacci(number - 1) + number - 1;
+    int numberMinus1 = number - 1;
+    return this.Fibonacci(numberMinus1) + numberMinus1;
   }
 
   /// <summary>
@@ -140,16 +137,18 @@ public class BrunchBound : Algorithm {
   private VectorsDistance SelectCandidate() {
     if (!this.strategy) {
       VectorsUpperLimit candidate = this.queue[0];
+      int index = 0;
       for (int i = 1; i < this.queue.Count; i++) {
-        if (this.queue[i].UpperLimit < candidate.UpperLimit) {
+        if (this.queue[i].UpperLimit > candidate.UpperLimit) {
           candidate = this.queue[i];
+          index = i;
         }
       }
-      this.queue.Remove(candidate);
+      this.queue.RemoveAt(index);
       return candidate.Vectors;
     } else {
       VectorsUpperLimit candidate = this.queue[0];
-      this.queue.Remove(candidate);
+      this.queue.RemoveAt(0);
       return candidate.Vectors;
     }
   }
