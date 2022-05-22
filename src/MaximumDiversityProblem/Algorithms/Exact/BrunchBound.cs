@@ -133,14 +133,14 @@ public class BrunchBound : Algorithm {
         this.PopulateCandidatesQueue(currentVector);
         nodesCount++;
       }
-    } else {
-      this.list = new List<VectorsUpperLimit>();
-      this.PopulateCandidatesList(new VectorsDistance(this.vectors.Vectors));
-      while (this.list.Count > 0) {
-        VectorsDistance currentVector = this.SelectCandidateList();
-        this.PopulateCandidatesList(currentVector);
-        nodesCount++;
-      }
+      return this.vectors;
+    }
+    this.list = new List<VectorsUpperLimit>();
+    this.PopulateCandidatesList(new VectorsDistance(this.vectors.Vectors));
+    while (this.list.Count > 0) {
+      VectorsDistance currentVector = this.SelectCandidateList();
+      this.PopulateCandidatesList(currentVector);
+      nodesCount++;
     }
     return this.vectors;
   }
@@ -151,27 +151,23 @@ public class BrunchBound : Algorithm {
   /// <returns>A list of vectors distance.</returns>
   private void PopulateCandidatesList(VectorsDistance vectors) {
     for (int i = 0; i < vectors.Count; i++) {
-      if (!vectors.Indices[i]) {
-        VectorsUpperLimit candidate = new VectorsUpperLimit(vectors);
-        candidate.AddVector(i);
-        if (candidate.LengthSolution >= this.maxLength) {
-          if (candidate.Distance > this.lowerBound) {
-            this.vectors = candidate.Vectors;
-            this.lowerBound = candidate.Distance;
-            for (int j = 0; j < this.list.Count; j++) {
-              if (this.list[j].UpperLimit <= this.lowerBound) {
-                this.list.RemoveAt(j);
-                j--;
-              }
-            }
-          }
-        } else {
-          this.SetUpperLimit(candidate);
-          if (candidate.UpperLimit > this.lowerBound) {
-            this.list.Add(candidate);
-          }
+      if (vectors.Indices[i]) continue;
+      VectorsUpperLimit candidate = new VectorsUpperLimit(vectors);
+      candidate.AddVector(i);
+      if (candidate.LengthSolution >= this.maxLength) {
+        if (candidate.Distance <= this.lowerBound) continue;
+        this.vectors = candidate.Vectors;
+        this.lowerBound = candidate.Distance;
+        for (int j = 0; j < this.list.Count; j++) {
+          if (this.list[j].UpperLimit > this.lowerBound) continue;
+          this.list.RemoveAt(j);
+          j--;
         }
+        continue;
       }
+      this.SetUpperLimit(candidate);
+      if (candidate.UpperLimit <= this.lowerBound) continue;
+      this.list.Add(candidate);
     }
   }
 
@@ -181,24 +177,21 @@ public class BrunchBound : Algorithm {
   /// <returns>A list of vectors distance.</returns>
   private void PopulateCandidatesQueue(VectorsDistance vectors) {
     for (int i = 0; i < vectors.Count; i++) {
-      if (!vectors.Indices[i]) {
-        VectorsUpperLimit candidate = new VectorsUpperLimit(vectors);
-        candidate.AddVector(i);
-        if (candidate.LengthSolution >= this.maxLength) {
-          if (candidate.Distance > this.lowerBound) {
-            this.vectors = candidate.Vectors;
-            this.lowerBound = candidate.Distance;
-            this.queue = new Queue<VectorsUpperLimit>(
-              this.queue.Where(x => x.UpperLimit > this.lowerBound)
-            );
-          }
-        } else {
-          this.SetUpperLimit(candidate);
-          if (candidate.UpperLimit > this.lowerBound) {
-            this.queue.Enqueue(candidate);
-          }
-        }
+      if (vectors.Indices[i]) continue;
+      VectorsUpperLimit candidate = new VectorsUpperLimit(vectors);
+      candidate.AddVector(i);
+      if (candidate.LengthSolution >= this.maxLength) {
+        if (candidate.Distance <= this.lowerBound) continue;
+        this.vectors = candidate.Vectors;
+        this.lowerBound = candidate.Distance;
+        this.queue = new Queue<VectorsUpperLimit>(
+          this.queue.Where(x => x.UpperLimit > this.lowerBound)
+        );
+        continue;
       }
+      this.SetUpperLimit(candidate);
+      if (candidate.UpperLimit <= this.lowerBound) continue;
+      this.queue.Enqueue(candidate);
     }
   }
 
